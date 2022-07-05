@@ -38,7 +38,7 @@ def convert(dir_path, sample_rate, n_electrodes):
     times_t = np.array(times_byc, dtype=object)[np.newaxis].transpose() / sample_rate
     # print('units_byc =')
     # print(units_byc)
-    print('np.array(units_byc, dtype=object).shape =', np.array(units_byc, dtype=object).shape)
+    # print('np.array(units_byc, dtype=object).shape =', np.array(units_byc, dtype=object).shape)
     print('np.array(units_byc, dtype=object)[np.newaxis].shape =', np.array(units_byc, dtype=object)[np.newaxis].shape)
     units_t = np.array(units_byc, dtype=object)[np.newaxis].transpose()
     print('units_t.shape =', units_t.shape)
