@@ -2,8 +2,11 @@ import numpy as np
 from scipy.io import savemat
 from lib.kilo2plex import SimpleController, reorganize_by_prim_elec, renumber_unit_ids_from_global_to_local
 
-# dir_path = '../../kiloout_220626'   # output directory of kilosort
-dir_path = '../../kiloSorted_Nana32/n100122/s1'
+kilo_sorted_dir = '../../kiloSorted_Nana32'
+
+subsession_path = '/n100122/s1'
+
+dir_path = kilo_sorted_dir + subsession_path
 dat_path = dir_path + '/temp_wh.dat'   # signal file produced by kilosort to the working directory
 sample_rate = 30000   # sampling rate used by the electrodes
 n_channels_dat = 32   # number of electrodes
