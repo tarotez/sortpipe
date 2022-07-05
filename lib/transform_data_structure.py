@@ -25,8 +25,8 @@ def reorganize_by_prim_elec(waveformsL, times, spike_idsL, prim_elecL):
 #----------------------------------------------------------------------------
 # renumber unit_ids so it starts from 1 for all channels.
 def renumber_unit_ids_from_global_to_local(units_byc):
-    units_byc_renum = []
-    for units in units_byc:
+    units_byc_renum = [np.zeros((0), dtype=np.int16)[np.newaxis].transpose() for _ in range(len(units_byc))]
+    for channel_id, units in enumerate(units_byc):
         unique_units = []
         for unit in units:
             if not unit[0] in unique_units:
@@ -36,6 +36,7 @@ def renumber_unit_ids_from_global_to_local(units_byc):
             g2l[global_id] = np.int16(local_id)
         renum = list(map(lambda x: [g2l[x[0]]], units))
         # setting the elements of units_byc_renum to be in the 2-D array shape that will be converted to Matlab matrices
-        units_byc_renum.append(np.array(renum, dtype=np.int16)[np.newaxis])
+        if len(renum) > 0:
+            units_byc_renum[channel_id] = np.array(renum, dtype=np.int16)[np.newaxis]
         
     return units_byc_renum
