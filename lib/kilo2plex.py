@@ -4,7 +4,10 @@ from phy.apps.template import TemplateController
 from phy.apps.base import RawDataFilter
 from phylib.io.model import TemplateModel
 from phy.utils.context import Context
+from phylib.utils._types import Bunch
 
+#----------------------------------------------------------------------------
+# overrides __init__() of TemplateController in Phy (spike visualization tool).
 class SimpleController(TemplateController, WaveformMixin):
     def __init__(self, dir_path, dat_path, sample_rate, n_channels_dat, **kwargs):
         self.model = TemplateModel(dir_path=dir_path, dat_path=dat_path, sample_rate=sample_rate, 
@@ -61,7 +64,7 @@ class SimpleController(TemplateController, WaveformMixin):
             channel_positions=pos[channel_ids],
         ), spike_ids
 
-
+#----------------------------------------------------------------------------
 # reorganize (sort) waveforms and spike_times by channels (i.e electrodes).
 # units_byc[channel_id]: a map from spike to cluster (i.e. unit).
 def reorganize_by_prim_elec(waveformsL, times, spike_idsL, prim_elecL):
@@ -80,3 +83,19 @@ def reorganize_by_prim_elec(waveformsL, times, spike_idsL, prim_elecL):
             times_byc[prim_elec] = np.concatenate((times_byc[prim_elec], times_segment[np.newaxis].transpose()), axis=0)
             units_byc[prim_elec] = np.concatenate((units_byc[prim_elec], np.array([cluster_id] * spike_num, dtype=np.int16)[np.newaxis].transpose()), axis=0)                    
     return wvf_byc, times_byc, units_byc
+
+#----------------------------------------------------------------------------
+# renumber unit_ids so it starts from 1 for all channels.
+def renumber_unit_ids_from_global_to_local(units_byc):
+    units_byc_renum = []
+    for channel_id, units in enumerate(units_byc):
+        unique_units = []
+        for unit in units:
+            if not unit[0] in unique_units:
+                unique_units.append(unit[0])
+        g2l = dict()
+        for local_id, global_id in enumerate(unique_units, start=1):
+            g2l[global_id] = local_id
+        renum = map(lambda x: [g2l[x[0]]], units)
+        units_byc_renum.append(list(renum))
+    return units_byc_renum

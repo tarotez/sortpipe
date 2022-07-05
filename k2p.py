@@ -1,7 +1,6 @@
 import numpy as np
 from scipy.io import savemat
-from lib.kilo2plex import SimpleController, reorganize_by_prim_elec
-from phylib.utils._types import Bunch
+from lib.kilo2plex import SimpleController, reorganize_by_prim_elec, renumber_unit_ids_from_global_to_local
 
 # dir_path = '../../kiloout_220626'   # output directory of kilosort
 dir_path = '../../kiloSorted_Nana32/n100122/s1'
@@ -35,3 +34,14 @@ for cluster_id in range(n_clusters):
     except:
         print('cluster', cluster_id, 'missing.')
 
+wvf_byc, times_byc, units_byc = reorganize_by_prim_elec(waveformsL, spike_times, spike_idsL, primary_electrodeL)
+units_byc = renumber_unit_ids_from_global_to_local(units_byc)
+
+
+# format and save a mat file.
+wvf_t = np.array(wvf_byc, dtype=object)[np.newaxis].transpose()
+times_t = np.array(times_byc, dtype=object)[np.newaxis].transpose()
+units_t = np.array(units_byc, dtype=object)[np.newaxis].transpose()
+
+k2o_mult = dict(times=times_t, wvf=wvf_t, units=units_t)
+savemat('../k2o_mult.mat', k2o_mult)
