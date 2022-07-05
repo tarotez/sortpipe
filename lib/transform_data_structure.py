@@ -36,6 +36,6 @@ def renumber_unit_ids_from_global_to_local(units_byc):
             g2l[global_id] = np.int16(local_id)
         renum = list(map(lambda x: [g2l[x[0]]], units))
         # setting the elements of units_byc_renum to be in the 2-D array shape that will be converted to Matlab matrices
-        units_byc_renum.append(np.array(renum, dtype=np.int16)[np.newaxis].transpose())
+        units_byc_renum.append(np.array(renum, dtype=np.int16)[np.newaxis])
         
     return units_byc_renum
