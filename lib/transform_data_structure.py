@@ -37,6 +37,6 @@ def renumber_unit_ids_from_global_to_local(units_byc):
         renum = list(map(lambda x: [g2l[x[0]]], units))
         # setting the elements of units_byc_renum to be in the 2-D array shape that will be converted to Matlab matrices
         if len(renum) > 0:
-            units_byc_renum[channel_id] = np.array(renum, dtype=np.int16)[np.newaxis]
+            units_byc_renum[channel_id] = np.array(renum, dtype=np.int16)[np.newaxis].transpose()
         
     return units_byc_renum
