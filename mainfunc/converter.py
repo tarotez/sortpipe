@@ -3,12 +3,12 @@ import numpy as np
 from lib.simple_controller import SimpleController
 from lib.transform_data_structure import reorganize_by_prim_elec, renumber_unit_ids_from_global_to_local
 
-def convert(dir_path, sample_rate, n_electrodes):
+def convert(dir_path, sample_rate, n_electrodes, sep):
 
-    dat_path = dir_path + '/temp_wh.dat'   # kilosort outputs waveforms into temp_wh.dat in the working directory
-    # channel_map = np.load(dir_path + '/channel_map.npy')
-    spike_clusters = np.load(dir_path + '/spike_clusters.npy')
-    spike_times = np.double(np.load(dir_path + '/spike_times.npy'))
+    dat_path = dir_path + sep + 'temp_wh.dat'   # kilosort outputs waveforms into temp_wh.dat in the working directory
+    # channel_map = np.load(dir_path + sep + 'channel_map.npy')
+    spike_clusters = np.load(dir_path + sep + 'spike_clusters.npy')
+    spike_times = np.double(np.load(dir_path + sep + 'spike_times.npy'))
     n_clusters = len(np.unique(spike_clusters))
 
     sc = SimpleController(dir_path, dat_path, sample_rate, n_electrodes)

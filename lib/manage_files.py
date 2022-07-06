@@ -1,5 +1,5 @@
 from os import listdir, mkdir
-from os.path import exists, splitext
+from os.path import exists
 
 def get_all_paths(root_dir, sep):
     paths = []
