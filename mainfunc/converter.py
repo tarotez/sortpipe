@@ -19,7 +19,7 @@ def convert(dir_path, sample_rate, n_electrodes):
     waveformsL = []
     spike_idsL = []
     primary_electrodeL = []   # map: cluster_id -> channel_id
-    # print('original number of clusters:', n_clusters)
+    # print('original number of clusters:', n_clusters)    
     for cluster_id in range(n_clusters):
         try:
             waveforms, spike_ids = sc._get_waveforms(cluster_id)

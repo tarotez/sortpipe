@@ -1,29 +1,30 @@
 from os import listdir, mkdir
 from os.path import exists, splitext
 
-def get_all_paths(root_dir):
+def get_all_paths(root_dir, sep):
     paths = []
     for session in listdir(root_dir):
-        for subsession in listdir(root_dir + '/' + session):
-            paths.append(session + '/' + subsession)
+        for subsession in listdir(root_dir + sep + session):
+            paths.append(session + sep + subsession)
     return paths
 
-def filter_out_processed(in_paths, already_processed_paths):
+def filter_out_processed(orig_paths, already_processed_paths):
     unprocessed_paths = []
-    for path in in_paths:
+    for path in orig_paths:
         if path not in already_processed_paths:
-            unprocessed_paths.append(in_path)
+            unprocessed_paths.append(path)
     return unprocessed_paths
 
-def get_unprocessed(in_dir, out_dir):
-    return filter_out_processed(get_all_paths(in_dir), get_all_paths(out_dir))
+def get_unprocessed(in_dir, out_dir, sep):
+    return filter_out_processed(get_all_paths(in_dir, sep), get_all_paths(out_dir, sep))
 
-def make_directories(paths):
-    for path in paths:
-        elems = path.split('/')
-        path_super = ''
-        for dir_str in elems[:-1]:
-            path_super += dir_str + '/'
-            if not exists(path_super):
-                mkdir(path_super)
+def make_directories(root_dir, path, sep):
+    elems = path.split(sep)
+    path_super = root_dir + sep
+    for dir_str in elems:
+        path_super += dir_str + sep
+        # print('checking if', path_super, 'exists.')            
+        if not exists(path_super):
+            # print('making', path_super, 'directory.')
+            mkdir(path_super)
 
