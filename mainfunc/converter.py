@@ -39,8 +39,6 @@ def convert(dir_path, sample_rate, n_electrodes):
     # print('units_byc =')
     # print(units_byc)
     # print('np.array(units_byc, dtype=object).shape =', np.array(units_byc, dtype=object).shape)
-    print('np.array(units_byc, dtype=object)[np.newaxis].shape =', np.array(units_byc, dtype=object)[np.newaxis].shape)
     units_t = np.array(units_byc, dtype=object)[np.newaxis].transpose()
-    print('units_t.shape =', units_t.shape)
 
     return dict(times=times_t, wvf=wvf_t, units=units_t)
