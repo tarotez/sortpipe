@@ -8,7 +8,7 @@ sortpipe (this repository)\
 -- mainfunc\
 -- lib\
 config\
--- softpipe_config.csv
+-- sortpipe_config.csv
 
 ## Example config file (sortpipe_config.csv):
 
