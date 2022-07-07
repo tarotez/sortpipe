@@ -15,4 +15,3 @@ def read_config():
     params.sep = "/"
 
     return params
-
