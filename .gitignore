@@ -10,4 +10,4 @@ __pycache__/*
 *.pyc
 .python-version
 config/*
-exp/*
+exp/*.ipynb_checkpoints
