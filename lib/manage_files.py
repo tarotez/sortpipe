@@ -4,8 +4,10 @@ from os.path import exists
 def get_all_paths(root_dir, sep):
     paths = []
     for session in listdir(root_dir):
-        for subsession in listdir(root_dir + sep + session):
-            paths.append(session + sep + subsession)
+        if not session.startswith('.'):
+            for subsession in listdir(root_dir + sep + session):
+                if not subsession.startswith('.'):
+                    paths.append(session + sep + subsession)
     return paths
 
 def filter_out_processed(orig_paths, already_processed_paths):
