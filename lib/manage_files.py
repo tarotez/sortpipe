@@ -10,15 +10,15 @@ def get_all_paths(root_dir, sep):
                     paths.append(session + sep + subsession)
     return paths
 
-def filter_out_processed(orig_paths, already_processed_paths):
+def filter_out_processed(input_paths, out_dir, output_mat_file_name, sep):
     unprocessed_paths = []
-    for path in orig_paths:
-        if path not in already_processed_paths:
-            unprocessed_paths.append(path)
+    for input_path in input_paths:        
+        if not exists(out_dir + sep + input_path + sep + output_mat_file_name):
+            unprocessed_paths.append(input_path)
     return unprocessed_paths
 
-def get_unprocessed(in_dir, out_dir, sep):
-    return filter_out_processed(get_all_paths(in_dir, sep), get_all_paths(out_dir, sep))
+def get_unprocessed(in_dir, out_dir, output_mat_file_name, sep):
+    return filter_out_processed(get_all_paths(in_dir, sep), out_dir, output_mat_file_name, sep)
 
 def make_directories(root_dir, path, sep):
     elems = path.split(sep)
