@@ -10,4 +10,6 @@ __pycache__/*
 *.pyc
 .python-version
 config/*
-exp/*.ipynb_checkpoints
+.DS_Store
+lib/__pycache__/*
+mainfunc/__pycache__/*
