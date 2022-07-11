@@ -23,7 +23,7 @@ def convert(dir_path, sample_rate, n_electrodes, sep):
     for cluster_id in range(n_clusters):
         try:
             waveforms, spike_ids = sc._get_waveforms(cluster_id)
-            waveformsL.append(np.single(waveforms.data[:,:,channel_rank]))
+            waveformsL.append(waveforms.data[:,:,channel_rank])
             spike_idsL.append(spike_ids)
             primary_electrodeL.append(waveforms.channel_ids[0])
         except:
