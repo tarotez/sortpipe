@@ -6,7 +6,7 @@ import numpy as np
 def reorganize_by_prim_elec(waveformsL, times, spike_idsL, prim_elecL):
     n_channels = max(prim_elecL) + 1
     n_samples = waveformsL[0].shape[1]
-    wvf_byc = [np.zeros((0, n_samples), dtype=np.double) for _ in range(n_channels)]
+    wvf_byc = [np.zeros((0, n_samples)) for _ in range(n_channels)]
     # setting the elements of times_byc and units_byc to be in the 2-D array shape that will be converted to Matlab matrices
     times_byc = [np.zeros((0), dtype=np.double)[np.newaxis].transpose() for _ in range(n_channels)]
     units_byc = [np.zeros((0), dtype=np.int16)[np.newaxis].transpose() for _ in range(n_channels)]

@@ -12,4 +12,4 @@ for subsession_path in get_unprocessed(params.kilo_sorted_dir, params.plexon_inp
     in_path = params.kilo_sorted_dir + sep + subsession_path
     out_path = params.plexon_input_dir + sep + subsession_path + sep + params.output_mat_file_name
     converted = convert(in_path, np.double(params.sample_rate), int(params.n_electrodes), sep)
-    hdf5storage.savemat(out_path, converted, format='7.3', oned_as='column', store_python_metadata=True)
+    hdf5storage.savemat(out_path, converted, format='7.3', store_python_metadata=True)
