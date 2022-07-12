@@ -1,7 +1,7 @@
 
 import numpy as np
 from lib.simple_controller import SimpleController
-from lib.transform_data_structure import reorganize_by_prim_elec, renumber_unit_ids_from_global_to_local
+from lib.transform_data_structure import reorganize_by_prim_elec, renumber_unit_ids_from_global_to_local, add_noise_unit_to_empty_channel
 
 def convert(dir_path, sample_rate, n_electrodes, sep):
 
@@ -33,12 +33,19 @@ def convert(dir_path, sample_rate, n_electrodes, sep):
     wvf_byc, times_byc, units_byc = reorganize_by_prim_elec(waveformsL, spike_times, spike_idsL, primary_electrodeL)
     units_byc = renumber_unit_ids_from_global_to_local(units_byc)
 
+    wvf_byc, times_byc, units_byc = add_noise_unit_to_empty_channel(wvf_byc, times_byc, units_byc)
+
+    wvf = np.array(wvf_byc, dtype=object)
+    times = np.array(times_byc, dtype=object) / sample_rate
+    units = np.array(units_byc, dtype=object)
+    return dict(wvf=wvf, times=times, units=units)
+
     # change 1-D numpy array into matlab matrices (2-D).
-    wvf_t = np.array(wvf_byc, dtype=object)[np.newaxis].transpose()
-    times_t = np.array(times_byc, dtype=object)[np.newaxis].transpose() / sample_rate
-    units_t = np.array(units_byc, dtype=object)[np.newaxis].transpose()
+    # wvf_t = np.array(wvf_byc, dtype=object)[np.newaxis].transpose()
+    # times_t = np.array(times_byc, dtype=object)[np.newaxis].transpose() / sample_rate
     # print('units_byc =')
     # print(units_byc)
     # print('np.array(units_byc, dtype=object).shape =', np.array(units_byc, dtype=object).shape)
+    # units_t = np.array(units_byc, dtype=object)[np.newaxis].transpose()
 
-    return dict(times=times_t, wvf=wvf_t, units=units_t)
+    # return dict(times=times_t, wvf=wvf_t, units=units_t)
