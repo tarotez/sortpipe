@@ -5,7 +5,7 @@ from lib.manage_params import read_config
 params = read_config()
 sep = params.sep
 
-for subsession_path in get_unprocessed(params.plexon_sorted_dir, params.for_stability_analysis_dir, params.output_mat_file_name, sep):
+for subsession_path in get_unprocessed(params.plexon_input_dir, params.for_stability_analysis_dir, params.output_mat_file_name, sep):
 
     print('subsession_path =', subsession_path)
     # make_directories(params.plexon_input_dir, subsession_path, sep)
@@ -14,7 +14,7 @@ for subsession_path in get_unprocessed(params.plexon_sorted_dir, params.for_stab
     out_dir = params.for_stability_analysis_dir + '/' + subsession_path
 
     # orig_data = hdf5storage.loadmat(orig_path, format='7.3', oned_as='column')
-    orig_data = hdf5storage.loadmat(in_path, oned_as='column')
+    orig_data = hdf5storage.loadmat(in_path)
     wvf = orig_data.wvf
     times = orig_data.time3s
 
