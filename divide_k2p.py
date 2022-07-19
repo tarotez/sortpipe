@@ -8,19 +8,26 @@ sep = params.sep
 for subsession_path in get_unprocessed(params.plexon_input_dir, params.for_stability_analysis_dir, params.output_mat_file_name, sep):
 
     print('subsession_path =', subsession_path)
-    # make_directories(params.plexon_input_dir, subsession_path, sep)
+    make_directories(params.for_stability_analysis_dir, subsession_path, sep)
     
     in_path = params.plexon_input_dir + '/' + subsession_path + '/' + params.output_mat_file_name
     out_dir = params.for_stability_analysis_dir + '/' + subsession_path
 
     # orig_data = hdf5storage.loadmat(orig_path, format='7.3', oned_as='column')
     orig_data = hdf5storage.loadmat(in_path)
-    wvf = orig_data.wvf
-    times = orig_data.time3s
+    wvf = orig_data['wvf']
+    times = orig_data['times']
 
-    for electrodeID in enumerate(len(wvf)):
+    for orig_electrodeID in range(len(wvf)):
 
-        wvf_elem = wvf[electrodeID]
-        times_elem = times[electrodeID]
+        wvf_elem = wvf[orig_electrodeID]
+        times_elem = times[orig_electrodeID]
         divided = dict(wvf=wvf_elem, times=times_elem)
-        hdf5storage.savemat(out_dir, divided, format='7.3', oned_as='column')
+        new_electrodeID = orig_electrodeID + 1
+        sessionID = ...
+        subsessionID = ...
+
+
+        trg_fileName = sessionID + '_el' + new_electrodeID + '_subsess' + subsessionID + '.mat'
+        out_path = out_dir + '/' + trg_fileName
+        hdf5storage.savemat(out_path, divided, format='7.3', oned_as='column')
