@@ -38,4 +38,4 @@ def convert(dir_path, sample_rate, n_electrodes, sep):
     times_t = np.array(times_byc, dtype=object)[np.newaxis].transpose() / sample_rate
     units_t = np.array(units_byc, dtype=object)[np.newaxis].transpose()
 
-    return dict(times=times_t, wvf=wvf_t, units=units_t)
+    return dict(wvf=wvf_t, times=times_t, units=units_t)
