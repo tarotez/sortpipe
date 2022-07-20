@@ -10,11 +10,11 @@ for subsession_path in get_unprocessed(params.plexon_input_dir, params.for_stabi
     make_directories(params.for_stability_analysis_dir, subsession_path)
     
     sessionID, subsessionID = subsession_path.split('/')
-    in_path = params.plexon_input_dir + '/' + subsession_path + '/' + sessionID + '.mat'
-    out_dir = params.for_stability_analysis_dir + '/' + subsession_path
+    src_path = params.plexon_input_dir + '/' + subsession_path + '/' + sessionID + '.mat'
+    trg_dir = params.for_stability_analysis_dir + '/' + sessionID + '/elc_01plx'
 
     # orig_data = hdf5storage.loadmat(orig_path, format='7.3', oned_as='column')
-    orig_data = hdf5storage.loadmat(in_path)
+    orig_data = hdf5storage.loadmat(src_path)
     wvf = orig_data['wvf']
     times = orig_data['times']
 
@@ -25,5 +25,5 @@ for subsession_path in get_unprocessed(params.plexon_input_dir, params.for_stabi
         divided = dict(wvf=wvf_elem, times=times_elem)
         new_electrodeID = str(orig_electrodeID + 1)
         trg_fileName = sessionID + '_el' + new_electrodeID + '_subsess' + subsessionID + '.mat'
-        out_path = out_dir + '/' + trg_fileName
-        hdf5storage.savemat(out_path, divided, format='7.3', oned_as='column')
+        trg_path = trg_dir + '/' + trg_fileName
+        hdf5storage.savemat(trg_path, divided, format='7.3', oned_as='column')
