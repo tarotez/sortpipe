@@ -3,12 +3,11 @@ from lib.manage_files import get_unprocessed, make_directories
 from lib.manage_params import read_config
 
 params = read_config()
-sep = params.sep
 
-for subsession_path in get_unprocessed(params.plexon_input_dir, params.for_stability_analysis_dir, params.output_mat_file_name, sep):
+for subsession_path in get_unprocessed(params.plexon_input_dir, params.for_stability_analysis_dir, 'mat'):
 
     print('subsession_path =', subsession_path)
-    make_directories(params.for_stability_analysis_dir, subsession_path, sep)
+    make_directories(params.for_stability_analysis_dir, subsession_path)
     
     in_path = params.plexon_input_dir + '/' + subsession_path + '/' + params.output_mat_file_name
     out_dir = params.for_stability_analysis_dir + '/' + subsession_path
@@ -26,6 +25,7 @@ for subsession_path in get_unprocessed(params.plexon_input_dir, params.for_stabi
         new_electrodeID = orig_electrodeID + 1
         sessionID = ...
         subsessionID = ...
+
 
 
         trg_fileName = sessionID + '_el' + new_electrodeID + '_subsess' + subsessionID + '.mat'

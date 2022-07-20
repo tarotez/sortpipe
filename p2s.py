@@ -4,17 +4,16 @@ from lib.manage_params import read_config
 from lib.manage_files import get_unprocessed, make_directories
 
 params = read_config()
-sep = params.sep
-for subsession_path in get_unprocessed(params.manually_sorted_dir, params.for_stability_analysis_dir, params.output_mat_file_name, sep):
 
-    make_directories(params.for_stability_analysis_dir, subsession_path, sep)
+for subsession_path in get_unprocessed(params.manually_sorted_dir, params.for_stability_analysis_dir, 'mat'):
+
+    make_directories(params.for_stability_analysis_dir, subsession_path)
     src_dir = params.manually_sorted_dir + '/' + subsession_path
     trg_dir = params.for_stability_analysis_dir + '/' + subsession_path
 
     sessionID, subsessionID = subsession_path.split('/')    
 
-    for src_file in listdir(src_dir):
-        
+    for src_file in listdir(src_dir):        
         src_path = src_dir + '/' + src_file        
         elems = src_file.split('.')[0].split('_')
         print(elems)
