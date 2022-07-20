@@ -13,11 +13,14 @@ def get_all_paths(root_dir):
 def filter_out_processed(input_paths, out_dir, target_extension):
     unprocessed_paths = []
     for input_path in input_paths:
-        for filename in listdir(out_dir + '/' + input_path):
-            ext = splitext(filename)[1]
-            if ext.endswith(target_extension):
-                unprocessed_paths.append(input_path)
-                break
+        if exists(out_dir + '/' + input_path):
+            for filename in listdir(out_dir + '/' + input_path):
+                ext = splitext(filename)[1]
+                if ext.endswith(target_extension):
+                    unprocessed_paths.append(input_path)
+                    break
+        else:
+            unprocessed_paths.append(input_path)
     return unprocessed_paths
 
 def get_unprocessed(in_dir, out_dir, target_extension):
@@ -27,6 +30,7 @@ def make_directories(root_dir, path):
     elems = path.split('/')
     path_super = root_dir + '/'
     for dir_str in elems:
+        # print('dir_str =', dir_str)
         path_super += dir_str + '/'
         # print('checking if', path_super, 'exists.')            
         if not exists(path_super):
