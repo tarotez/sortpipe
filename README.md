@@ -17,4 +17,4 @@ n_electrodes, 32\
 kilo_sorted_dir, ../../data/kiloSorted_Nana32\
 plexon_input_dir, ../../data/toPlexonOfflineSorter_Nana32\
 manually_sorted_dir, ../../data/manuallySorted_Nana32\
-for_stability_analysis_dir, ../../data/forStabilityAnalysis_Nana32\
+for_stability_analysis_dir, ../../data/forStabilityAnalysis_Nana32
