@@ -16,12 +16,12 @@ for subsession_path in get_unprocessed(params.manually_sorted_dir, params.for_st
     for src_file in listdir(src_dir):        
         src_path = src_dir + '/' + src_file        
         elems = src_file.split('.')[0].split('_')
-        print(elems)
+        # print(elems)
         if len(elems) > 1:
             orig_electrodeID = elems[1]
             new_electrodeID = str(int(orig_electrodeID) + 1)
             trg_file = sessionID + '_el' + new_electrodeID + '_subsess' + subsessionID + '_sort.mat'
-            # print(src_file, '->', trg_file)
+            print(src_file, '->', trg_file)
             trg_path = trg_dir + '/' + trg_file
             print(src_path, '->', trg_path)
             sh.copyfile(src_path, trg_path)
