@@ -10,21 +10,22 @@ def get_all_paths(root_dir):
                     paths.append(session + '/' + subsession)
     return paths
 
-def filter_out_processed(input_paths, out_dir, target_extension):
+def filter_out_processed(input_paths, out_dir, target_suffix):
     unprocessed_paths = []
     for input_path in input_paths:
         if exists(out_dir + '/' + input_path):
+            flag = 1
             for filename in listdir(out_dir + '/' + input_path):
-                ext = splitext(filename)[1]
-                if ext.endswith(target_extension):
-                    unprocessed_paths.append(input_path)
-                    break
+                if filename.endswith(target_suffix):
+                    flag = 0
+            if flag:
+                unprocessed_paths.append(input_path)                
         else:
             unprocessed_paths.append(input_path)
     return unprocessed_paths
 
-def get_unprocessed(in_dir, out_dir, target_extension):
-    return filter_out_processed(get_all_paths(in_dir), out_dir, target_extension)
+def get_unprocessed(in_dir, out_dir, target_suffix):
+    return filter_out_processed(get_all_paths(in_dir), out_dir, target_suffix)
 
 def make_directories(root_dir, path):
     elems = path.split('/')
