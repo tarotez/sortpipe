@@ -10,8 +10,8 @@ for subsession_path in get_unprocessed(params.manually_sorted_dir, params.for_st
     print('subsession_path =', subsession_path)
     src_dir = params.manually_sorted_dir + '/' + subsession_path
     sessionID, subsessionID = subsession_path.split('/')
-    make_directories(params.for_stability_analysis_dir, sessionID)
     trg_dir = params.for_stability_analysis_dir + '/' + sessionID + '/elc_01plx'
+    make_directories(trg_dir)
 
     for src_file in listdir(src_dir):        
         src_path = src_dir + '/' + src_file        
