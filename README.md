@@ -12,8 +12,9 @@ config\
 
 ## Example config file (sortpipe_config.csv):
 
-sample_rate, 30000\
-n_electrodes, 32\
-kilo_sorted_dir, ../../kiloSorted\
-plexon_input_dir, ../../plexonSorterInput\
-output_mat_file_name, k2p.mat
+sample_rate, 30000
+n_electrodes, 32
+kilo_sorted_dir, ../../data/kiloSorted_Nana32
+plexon_input_dir, ../../data/toPlexonOfflineSorter_Nana32
+manually_sorted_dir, ../../data/manuallySorted_Nana32
+for_stability_analysis_dir, ../../data/forStabilityAnalysis_Nana32
