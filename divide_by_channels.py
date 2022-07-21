@@ -20,9 +20,9 @@ for subsession_path in get_unprocessed(params.plexon_input_dir, params.for_stabi
 
     for orig_electrodeID in range(len(wvf)):
 
-        wvf_single_cell = wvf[orig_electrodeID]
-        times_single_cell = times[orig_electrodeID]
-        divided = dict(wvf=wvf_single_cell, times=times_single_cell)
+        wvf_1by1 = np.array(wvf[orig_electrodeID], dtype=object)
+        times_1by1 = np.array(times[orig_electrodeID], dtype=object)
+        divided = dict(wvf=wvf_1by1, times=times_1by1)
         new_electrodeID = str(orig_electrodeID + 1)
         trg_fileName = sessionID + '_el' + new_electrodeID + '_subsess' + subsessionID + '.mat'
         trg_path = trg_dir + '/' + trg_fileName
