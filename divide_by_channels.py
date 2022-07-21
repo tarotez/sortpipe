@@ -1,6 +1,7 @@
 import numpy as np
-from scipy.io import savemat
-import hdf5storage
+from scipy.io import savemat as scipy_savemat
+from scipy.io.matlab.miobase import MatWriteError
+from hdf5storage import savemat as hdf5_savemat
 
 from lib.manage_files import get_unprocessed, make_directories
 from lib.manage_params import read_config
@@ -27,6 +28,9 @@ for subsession_path in get_unprocessed(params.plexon_input_dir, params.for_stabi
         divided = dict(wvf=wvf_1by1, times=times_1by1)
         new_electrodeID = str(orig_electrodeID + 1)
         trg_fileName = sessionID + '_el' + new_electrodeID + '_subsess' + subsessionID + '.mat'
-        trg_path = trg_dir + '/' + trg_fileName
-        # hdf5storage.savemat(trg_path, divided, format='7.3', oned_as='column')
-        savemat(trg_path, divided)
+        trg_path = trg_dir + '/' + trg_fileNam
+        try:
+            scipy_savemat(trg_path, divided)
+        except MatWriteError:
+            hdf5_savemat(trg_path, divided, format='7.3', oned_as='column')
+        
