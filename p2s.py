@@ -27,4 +27,4 @@ for subsession_path in get_unprocessed(params.manually_sorted_dir, params.for_st
             # print(src_file, '->', trg_file)
             trg_path = trg_dir + '/' + trg_file
             # print(src_path, '->', trg_path)
-            sh.copyfile(src_path, trg_path)
+            sh.move(src_path, trg_path)
