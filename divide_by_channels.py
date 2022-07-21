@@ -20,11 +20,14 @@ for subsession_path in get_unprocessed(params.plexon_input_dir, params.for_stabi
     orig_data = hdf5_loadmat(src_path)
     wvf = orig_data['wvf']
     times = orig_data['times']
+    print('times.shape =', times.shape)
 
     for orig_electrodeID in range(len(wvf)):
 
-        wvf_1by1 = np.array([wvf[orig_electrodeID]], dtype=object)
-        times_1by1 = np.array([times[orig_electrodeID]], dtype=object)
+        print('times.shape =', times[orig_electrodeID].shape)
+
+        wvf_1by1 = np.array(np.array([wvf[orig_electrodeID]]), dtype=object)
+        times_1by1 = np.array(np.array([times[orig_electrodeID]]), dtype=object)
         divided = dict(wvf=wvf_1by1, times=times_1by1)
         new_electrodeID = str(orig_electrodeID + 1)
         trg_fileName = sessionID + '_el' + new_electrodeID + '_subsess' + subsessionID + '.mat'
