@@ -28,7 +28,7 @@ for subsession_path in get_unprocessed(params.plexon_input_dir, params.for_stabi
         divided = dict(wvf=wvf_1by1, times=times_1by1)
         new_electrodeID = str(orig_electrodeID + 1)
         trg_fileName = sessionID + '_el' + new_electrodeID + '_subsess' + subsessionID + '.mat'
-        trg_path = trg_dir + '/' + trg_fileNam
+        trg_path = trg_dir + '/' + trg_fileName
         try:
             scipy_savemat(trg_path, divided)
         except MatWriteError:
