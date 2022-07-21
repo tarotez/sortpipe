@@ -1,7 +1,6 @@
 import numpy as np
 from scipy.io import savemat as scipy_savemat
-from scipy.io import loadmat as scipy_loadmat
-from scipy.io.matlab.miobase import MatReadError, MatWriteError
+from scipy.io.matlab.miobase import MatWriteError
 from hdf5storage import savemat as hdf5_savemat
 from hdf5storage import loadmat as hdf5_loadmat
 
@@ -18,10 +17,7 @@ for subsession_path in get_unprocessed(params.plexon_input_dir, params.for_stabi
     trg_dir = params.for_stability_analysis_dir + '/' + sessionID + '/elc_01plx'
     make_directories(trg_dir)
 
-    try:
-        orig_data = scipy_loadmat(src_path)
-    except MatReadError:
-        orig_data = hdf5_loadmat(src_path)
+    orig_data = hdf5_loadmat(src_path)
     wvf = orig_data['wvf']
     times = orig_data['times']
 
