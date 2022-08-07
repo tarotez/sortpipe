@@ -17,11 +17,10 @@ for subsession_path in get_unprocessed(params.kilo_sorted_dir, params.plexon_inp
     out_path = params.plexon_input_dir + '/' + subsession_path + '/' + sessionID + '.mat'
     converted = convert(in_path, np.double(params.sample_rate), int(params.n_electrodes))
 
-    if getsizeof(converted) < 2 * 1000 * 1000 * 1000:
+    print('the size of the dict is', getsizeof(converted))
+    if getsizeof(converted) < 1000 * 1000 * 1000:
         print('saving in Matlab 5 format.')
         scipy_savemat(out_path, converted)
     else:
         print('saving in Matlab 7.3 format.')
         hdf5_savemat(out_path, converted, format='7.3', oned_as='column')
-
-    
