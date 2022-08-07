@@ -20,11 +20,10 @@ for subsession_path in get_unprocessed(params.plexon_input_dir, params.for_stabi
     orig_data = hdf5_loadmat(src_path)
     wvf = orig_data['wvf']
     times = orig_data['times']
-    print('times.shape =', times.shape)
+    # print('times.shape =', times.shape)
 
     for orig_electrodeID in range(len(wvf)):
-
-        print('times.shape =', times[orig_electrodeID].shape)
+        # print('times.shape =', times[orig_electrodeID].shape)
 
         wvf_1by1 = np.array(np.array([[wvf[orig_electrodeID]]], dtype=np.double), dtype=object)
         times_1by1 = np.array(np.array([[times[orig_electrodeID]]], dtype=np.double), dtype=object)
