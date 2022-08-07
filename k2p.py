@@ -17,7 +17,7 @@ for subsession_path in get_unprocessed(params.kilo_sorted_dir, params.plexon_inp
     out_path = params.plexon_input_dir + '/' + subsession_path + '/' + sessionID + '.mat'
     converted = convert(in_path, np.double(params.sample_rate), int(params.n_electrodes))
 
-    print('the size of the wvf is', getsizeof(converted['wvf']))
+    # print('the size of the wvf is', getsizeof(converted['wvf']))
     # if getsizeof(converted['wvf']) < 1000 * 1000 * 1000:
     #    print('saving in Matlab 5 format.')
     #    scipy_savemat(out_path, converted)
