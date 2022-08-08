@@ -12,6 +12,7 @@ for subsession_path in get_unprocessed(params.plexon_input_dir, params.for_stabi
 
     print('subsession_path =', subsession_path)
     sessionID, subsessionID = subsession_path.split('/')
+    subsessionID_without_s = subsessionID[1:]
     src_path = params.plexon_input_dir + '/' + subsession_path + '/' + sessionID + '.mat'
     trg_dir = params.for_stability_analysis_dir + '/' + sessionID + '/elc_01plx'
     make_directories(trg_dir)
@@ -46,7 +47,7 @@ for subsession_path in get_unprocessed(params.plexon_input_dir, params.for_stabi
 
         divided = dict(wvf=np.array(wvf_1by1, dtype=object), times=np.array(times_1by1, dtype=object))
         new_electrodeID = str(orig_electrodeID + 1)
-        trg_fileName = sessionID + '_el' + new_electrodeID + '_subsess' + subsessionID + '.mat'
+        trg_fileName = sessionID + '_el' + new_electrodeID + '_subsess' + subsessionID_without_s + '.mat'
         trg_path = trg_dir + '/' + trg_fileName
         scipy_savemat(trg_path, divided)
         # hdf5_savemat(trg_path, divided, format='7.3', oned_as='column')
