@@ -1,7 +1,4 @@
 import numpy as np
-from sys import getsizeof
-from scipy.io import savemat as scipy_savemat
-from scipy.io.matlab.miobase import MatWriteError
 from hdf5storage import savemat as hdf5_savemat
 from mainfunc.converter import convert
 from lib.manage_params import read_config
