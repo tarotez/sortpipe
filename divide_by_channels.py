@@ -36,8 +36,9 @@ for subsession_path in get_unprocessed(params.plexon_input_dir, params.for_stabi
         wvf_1by1 = [np.zeros((0, n_samples))]
         times_1by1 = [np.zeros((0, n_samples), dtype=np.double)]
 
-        wvf_1by1[0][0,:] = wvf_byc[orig_electrodeID][0,:]
-        times_1by1[0][0,:] = times_byc[orig_electrodeID][0,:]
+        # np.concatenate((wvf_byc[prim_elec], waveforms), axis=0)
+        wvf_1by1[0] = np.concatenate((wvf_1by1[0], wvf_byc[orig_electrodeID]), axis=0)
+        times_1by1[0] = np.concatenate((times_1by1[0], times_byc[orig_electrodeID]), axis=0)
 
         print('wvf_1by1[0].shape =', wvf_1by1[0].shape)
         print('wvf_1by1[1].shape =', wvf_1by1[1].shape)
