@@ -26,6 +26,11 @@ for subsession_path in get_unprocessed(params.plexon_input_dir, params.for_stabi
         # wvf_byc = [np.zeros((0, n_samples)) for _ in range(n_channels)]         
         # wvf_1by1 = np.array([np.array([wvf[orig_electrodeID]], dtype=np.double)], dtype=object)
         # times_1by1 = np.array([np.array([times[orig_electrodeID]], dtype=np.double)], dtype=object)
+        
+        print('wvf_byc[0].shape =', wvf_byc[0].shape)
+        print('wvf_byc[1].shape =', wvf_byc[1].shape)
+        print('times_byc[0].shape =', times_byc[0].shape)
+        print('times_byc[1].shape =', times_byc[1].shape)
 
         n_samples = wvf_byc[0].shape[1]
         wvf_1by1 = [np.zeros((0, n_samples))]
@@ -33,6 +38,11 @@ for subsession_path in get_unprocessed(params.plexon_input_dir, params.for_stabi
 
         wvf_1by1[0][0,:] = wvf_byc[orig_electrodeID][0,:]
         times_1by1[0][0,:] = times_byc[orig_electrodeID][0,:]
+
+        print('wvf_1by1[0].shape =', wvf_1by1[0].shape)
+        print('wvf_1by1[1].shape =', wvf_1by1[1].shape)
+        print('times_1by1[0].shape =', times_1by1[0].shape)
+        print('times_1by1[1].shape =', times_1by1[1].shape)
 
         divided = dict(wvf=np.array(wvf_1by1, dtype=object), times=np.array(times_1by1, dtype=object))
         new_electrodeID = str(orig_electrodeID + 1)
