@@ -38,9 +38,7 @@ for subsession_path in get_unprocessed(params.plexon_input_dir, params.for_stabi
 
         print('before concatenation:')
         print('wvf_1by1[0].shape =', wvf_1by1[0].shape)
-        print('wvf_1by1[1].shape =', wvf_1by1[1].shape)
         print('times_1by1[0].shape =', times_1by1[0].shape)
-        print('times_1by1[1].shape =', times_1by1[1].shape)
 
         # np.concatenate((wvf_byc[prim_elec], waveforms), axis=0)
         wvf_1by1[0] = np.concatenate((wvf_1by1[0], wvf_byc[orig_electrodeID]), axis=0)
@@ -48,9 +46,7 @@ for subsession_path in get_unprocessed(params.plexon_input_dir, params.for_stabi
 
         print('after concatenation:')
         print('wvf_1by1[0].shape =', wvf_1by1[0].shape)
-        print('wvf_1by1[1].shape =', wvf_1by1[1].shape)
         print('times_1by1[0].shape =', times_1by1[0].shape)
-        print('times_1by1[1].shape =', times_1by1[1].shape)
 
         divided = dict(wvf=np.array(wvf_1by1, dtype=object), times=np.array(times_1by1, dtype=object))
         new_electrodeID = str(orig_electrodeID + 1)
