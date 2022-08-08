@@ -1,5 +1,6 @@
 import numpy as np
-from hdf5storage import savemat as hdf5_savemat
+# from hdf5storage import savemat as hdf5_savemat
+from scipy.io import savemat as scipy_savemat
 from hdf5storage import loadmat as hdf5_loadmat
 
 from lib.manage_files import get_unprocessed, make_directories
@@ -59,5 +60,5 @@ for subsession_path in get_unprocessed(params.plexon_input_dir, params.for_stabi
         new_electrodeID = str(orig_electrodeID + 1)
         trg_fileName = sessionID + '_el' + new_electrodeID + '_subsess' + subsessionID + '.mat'
         trg_path = trg_dir + '/' + trg_fileName
-        hdf5_savemat(trg_path, divided, format='7.3', oned_as='column')
-        
+        scipy_savemat(trg_path, divided)
+        # hdf5_savemat(trg_path, divided, format='7.3', oned_as='column')
