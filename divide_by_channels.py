@@ -45,7 +45,7 @@ for subsession_path in get_unprocessed(params.plexon_input_dir, params.for_stabi
         # print('wvf_1by1[0].shape =', wvf_1by1[0].shape)
         # print('times_1by1[0].shape =', times_1by1[0].shape)
 
-        divided = dict(wvf=np.array(wvf_1by1, dtype=object), times=np.array(times_1by1, dtype=object))
+        divided = dict(wvf=np.array(wvf_1by1, dtype=np.object), times=np.array(times_1by1, dtype=np.object))
         new_electrodeID = str(orig_electrodeID + 1)
         trg_fileName = sessionID + '_el' + new_electrodeID + '_subsess' + subsessionID_without_s + '.mat'
         trg_path = trg_dir + '/' + trg_fileName
