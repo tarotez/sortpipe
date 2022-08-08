@@ -1,18 +1,22 @@
 
 src_dir = "../../data/forStabilityAnalysis_Nana32";
-filenames = {dir(src_dir).names};
+sess_filenames = {dir(src_dir).name};
 
-for i = size(filenames,2)
-
-    filename = filenames(i);
+for i = 4:size(sess_filenames,2)
+    sess_filename = sess_filenames{i};
+    sess_dir = src_dir + '/' + sess_filename + "/elc_01plx";
+    subsess_filenames = {dir(sess_dir).name};
     
-    src_filename = '';
-
-    in_dir = [src_dir src_filename];
-    load(in_dir)
-
-    one_by_one_cell_array = 
-
-    save(out_dir, one_by_one_cell_array);
-
+    for j = 3:size(subsess_filenames,2)    
+        subsess_filename = subsess_filenames{j};
+        subsess_file_path = sess_dir + '/' + subsess_filename;
+        load(subsess_file_path)
+        wvf = cell(1);
+        times = cell(1);
+        wvf{1,1} = wvf_single_channel;
+        times{1,1} = times_single_channel;
+        save(subsess_file_path, wvf);
+        save(subsess_file_path, times);
+        clear
+    end
 end
