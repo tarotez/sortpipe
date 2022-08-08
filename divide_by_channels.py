@@ -29,10 +29,10 @@ for subsession_path in get_unprocessed(params.plexon_input_dir, params.for_stabi
 
         n_samples = wvf_byc[0].shape[1]
         wvf_1by1 = [np.zeros((0, n_samples))]
-        times_1by1 = [np.zeros((0, n_samples))]
+        times_1by1 = [np.zeros((0, n_samples), dtype=np.double)]
 
-        wvf_1by1[0][0,:] = wvf_byc[orig_electrodeID][   ]
-        times_1by1[0][0,:] = times_byc[orig_electrodeID][   ]
+        wvf_1by1[0][0,:] = wvf_byc[orig_electrodeID][0,:]
+        times_1by1[0][0,:] = times_byc[orig_electrodeID][0,:]
 
         divided = dict(wvf=np.array(wvf_1by1, dtype=object), times=np.array(times_1by1, dtype=object))
         new_electrodeID = str(orig_electrodeID + 1)
