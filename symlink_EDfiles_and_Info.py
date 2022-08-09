@@ -12,7 +12,12 @@ for subsession_path in get_unprocessed(params.plexon_input_dir, params.for_stabi
     trg_dir = params.for_stability_analysis_dir + '/' + sessionID 
     make_directories(trg_dir)
 
-    symlink()
-    symlink()
+    edf_src = 
+    edf_dst =
+    inf_src =
+    inf_dst = 
+
+    symlink(edf_src, edf_dst)
+    symlink(inf_src, inf_dst)
 
     

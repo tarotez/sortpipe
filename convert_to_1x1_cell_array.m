@@ -18,6 +18,5 @@ for i = 4:size(sess_filenames,2)
         wvf{1,1} = wvf_single_channel;
         times{1,1} = times_single_channel;
         save(subsess_file_path, 'wvf', 'times', 'wvf_single_channel', 'times_single_channel');        
-        clear
     end
 end
