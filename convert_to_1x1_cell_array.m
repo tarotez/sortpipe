@@ -19,6 +19,7 @@ for i = 4:size(sess_filenames,2)
         subsess_filename = subsess_filenames{j};
         if endsWith(subsess_filename, "_single_channel.mat")
             src_file_path = src_sess_dir + '/' + subsess_filename;
+            fprintf("%s\n", src_file_path)            
             load(src_file_path)
             wvf = cell(1);
             times = cell(1);
@@ -26,17 +27,20 @@ for i = 4:size(sess_filenames,2)
             times{1,1} = times_single_channel;
             trg_subsess_filename = strrep(subsess_filename, "_single_channel", "");
             trg_file_path = trg_sess_dir + '/' + trg_subsess_filename;
-            save(trg_file_path, 'wvf', 'times');
+            fprintf("  -> %s\n", trg_file_path)
+            save(trg_file_path, 'wvf', 'times');            
         end
         
         if endsWith(subsess_filename, "_single_channel_sort.mat")
-            src_file_path = src_sess_dir + '/' + subsess_filename;
+            src_file_path = src_sess_dir + '/' + subsess_filename;                        
+            fprintf("%s\n", src_file_path)  
             load(src_file_path)                                   
             elems = split(subsess_filename, '_');
             channelID_zero_origin = strrep(elems(2), 'el', '');
             eval('wvf0 = wvf' + channelID_zero_origin + ';');
             trg_subsess_filename = strrep(subsess_filename, "_single_channel", "");
             trg_file_path = trg_sess_dir + '/' + trg_subsess_filename;
+            fprintf("  -> %s\n", trg_file_path)
             save(trg_file_path, 'wvf0');
         end
         
