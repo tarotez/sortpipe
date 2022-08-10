@@ -11,7 +11,7 @@ for subsession_path in get_unprocessed(params.manually_sorted_dir, params.matrix
     src_dir = params.manually_sorted_dir + '/' + subsession_path
     sessionID, subsessionID = subsession_path.split('/')
     subsessionID_without_s = subsessionID[1:]
-    trg_dir = params.for_stability_analysis_dir + '/' + sessionID + '/elc_01plx'
+    trg_dir = params.matrix_not_cell_array_dir + '/' + sessionID + '/elc_01plx'
     make_directories(trg_dir)
 
     for src_file in listdir(src_dir):        

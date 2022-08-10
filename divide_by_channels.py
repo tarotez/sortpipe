@@ -14,7 +14,7 @@ for subsession_path in get_unprocessed(params.plexon_input_dir, params.matrix_no
     sessionID, subsessionID = subsession_path.split('/')
     subsessionID_without_s = subsessionID[1:]
     src_path = params.plexon_input_dir + '/' + subsession_path + '/' + sessionID + '.mat'
-    trg_dir = params.for_stability_analysis_dir + '/' + sessionID + '/elc_01plx'
+    trg_dir = params.matrix_not_cell_array_dir + '/' + sessionID + '/elc_01plx'
     make_directories(trg_dir)
 
     orig_data = hdf5_loadmat(src_path)
