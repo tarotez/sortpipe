@@ -1,6 +1,29 @@
 from os import listdir, mkdir
 from os.path import exists
 
+def get_all_sessionIDs(root_dir):
+    sessionIDs = []
+    for dirName in listdir(root_dir):
+        if not dirName.startswith('.'):
+            sessionIDs.append(dirName)
+    return sessionIDs
+
+def keep_existing(sessionIDs, out_dir):
+    out_paths = []
+    for sessionID in sessionIDs:
+        # print('input_path =', input_path)
+        # print('sessionID =', sessionID)
+        # print('out_dir =', out_dir)
+        out_path = out_dir + '/' + sessionID
+        # print('out_path =', out_path)
+        if exists(out_path):
+            out_paths.append(out_path)
+    return out_paths
+
+def get_existing(in_dir, out_dir):
+    return keep_existing(get_all_sessionIDs(in_dir), out_dir)
+
+
 def get_all_paths(root_dir):
     paths = []
     for session in listdir(root_dir):
