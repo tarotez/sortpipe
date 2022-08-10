@@ -24,7 +24,7 @@ for i = 4:size(sess_filenames,2)
             times = cell(1);
             wvf{1,1} = wvf_single_channel;
             times{1,1} = times_single_channel;
-            trg_subsess_file_name = strrep(subsess_filename, "_single_channel", "");
+            trg_subsess_filename = strrep(subsess_filename, "_single_channel", "");
             trg_file_path = trg_sess_dir + '/' + trg_subsess_filename;
             save(trg_file_path, 'wvf', 'times');
         end
@@ -35,7 +35,7 @@ for i = 4:size(sess_filenames,2)
             elems = split(subsess_filename, '_');
             channelID_zero_origin = strrep(elems(2), 'el', '');
             eval('wvf0 = wvf' + channelID_zero_origin + ';');
-            trg_subsess_file_name = strrep(subsess_filename, "_single_channel", "");
+            trg_subsess_filename = strrep(subsess_filename, "_single_channel", "");
             trg_file_path = trg_sess_dir + '/' + trg_subsess_filename;
             save(trg_file_path, 'wvf0');
         end
