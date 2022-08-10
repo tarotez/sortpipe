@@ -31,16 +31,12 @@ for i = 4:size(sess_filenames,2)
         
         if endsWith(subsess_filename, "_single_channel_sort.mat")
             src_file_path = src_sess_dir + '/' + subsess_filename;
-            load(src_file_path)
-                                   
-            channelID_zero_origin = get_channelID(subsess_filename);
-            
-            
-            eval('wvf0 = wvf' + channelID_zero_origin);
-            
-            
+            load(src_file_path)                                   
+            elems = split(subsess_filename, '_');
+            channelID_zero_origin = strrep(elems(2), 'el', '');
+            eval('wvf0 = wvf' + channelID_zero_origin + ';');
             trg_subsess_file_name = strrep(subsess_filename, "_single_channel", "");
-            trg_file_path = trg_sess_dir + '/' + trg_subsess_filename;            
+            trg_file_path = trg_sess_dir + '/' + trg_subsess_filename;
             save(trg_file_path, 'wvf0');
         end
         
