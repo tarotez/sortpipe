@@ -5,7 +5,7 @@ from lib.manage_files import get_unprocessed, make_directories
 
 params = read_config()
 
-for subsession_path in get_unprocessed(params.manually_sorted_dir, params.for_stability_analysis_dir, '.mat'):
+for subsession_path in get_unprocessed(params.manually_sorted_dir, params.matrix_not_cell_array_dir, '.mat'):
 
     print('subsession_path =', subsession_path)
     src_dir = params.manually_sorted_dir + '/' + subsession_path
