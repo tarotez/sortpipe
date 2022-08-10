@@ -30,6 +30,8 @@ for i = 4:size(sess_filenames,2)
             if ~isfile(trg_file_path)
                 fprintf("  -> %s\n", trg_file_path)
                 save(trg_file_path, 'wvf', 'times');            
+            else
+                fprintf("  -> already exists.\n")
             end
         end
         
@@ -45,6 +47,8 @@ for i = 4:size(sess_filenames,2)
             if isfile(grg_file_path)
                 fprintf("  -> %s\n", trg_file_path)
                 save(trg_file_path, 'wvf0');
+            else
+                fprintf("  -> already exists.\n")
             end
         end
         
