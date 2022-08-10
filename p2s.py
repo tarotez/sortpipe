@@ -24,7 +24,7 @@ for subsession_path in get_unprocessed(params.manually_sorted_dir, params.for_st
         if len(elems) == 2:
             orig_electrodeID = elems[1]
             new_electrodeID = str(int(orig_electrodeID) + 1)
-            trg_file = sessionID + '_el' + new_electrodeID + '_subsess' + subsessionID_without_s + '_sort.mat'
+            trg_file = sessionID + '_el' + new_electrodeID + '_subsess' + subsessionID_without_s + '_single_channel_sort.mat'
             # print(src_file, '->', trg_file)
             trg_path = trg_dir + '/' + trg_file
             print(src_path, '->', trg_path)

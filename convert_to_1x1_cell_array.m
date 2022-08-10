@@ -21,5 +21,19 @@ for i = 4:size(sess_filenames,2)
             out_file_path = strrep(in_file_path, "_single_channel", "");
             save(out_file_path, 'wvf', 'times');
         end
+        
+        if endsWith(subsess_filename, "_single_channel_sort.mat")
+            in_file_path = sess_dir + '/' + subsess_filename;
+            load(in_file_path)
+            wvf = cell(1);
+            
+            channelID_zero_origin =      (subsess_filename);
+            
+            
+            eval('wvf{1,1} = wvf' + channelID_zero_origin);
+            out_file_path = strrep(in_file_path, "_single_channel", "");
+            save(out_file_path, 'wvf');
+        end
+        
     end
 end
