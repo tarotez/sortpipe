@@ -32,15 +32,11 @@ for i = 4:size(sess_filenames,2)
         if endsWith(subsess_filename, "_single_channel_sort.mat")
             src_file_path = src_sess_dir + '/' + subsess_filename;
             load(src_file_path)
-            wvf0 = cell(1);
-                        
-            
-            %%% must get the channelID from subsess_filename
-            
+                                   
             channelID_zero_origin = get_channelID(subsess_filename);
             
             
-            eval('wvf0{1,1} = wvf' + channelID_zero_origin);
+            eval('wvf0 = wvf' + channelID_zero_origin);
             
             
             trg_subsess_file_name = strrep(subsess_filename, "_single_channel", "");
