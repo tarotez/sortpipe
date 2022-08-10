@@ -47,7 +47,7 @@ for subsession_path in get_unprocessed(params.plexon_input_dir, params.for_stabi
 
         divided = dict(wvf_single_channel=wvf_byc[orig_electrodeID], times_single_channel=times_byc[orig_electrodeID])
         new_electrodeID = str(orig_electrodeID + 1)
-        trg_fileName = sessionID + '_el' + new_electrodeID + '_subsess' + subsessionID_without_s + '.mat'
+        trg_fileName = sessionID + '_el' + new_electrodeID + '_subsess' + subsessionID_without_s + '_single_channel.mat'
         trg_path = trg_dir + '/' + trg_fileName
         scipy_savemat(trg_path, divided)
         # hdf5_savemat(trg_path, divided, format='7.3', oned_as='column')

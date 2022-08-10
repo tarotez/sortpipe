@@ -11,12 +11,15 @@ for i = 4:size(sess_filenames,2)
     
     for j = 3:size(subsess_filenames,2)    
         subsess_filename = subsess_filenames{j};
-        subsess_file_path = sess_dir + '/' + subsess_filename;
-        load(subsess_file_path)
-        wvf = cell(1);
-        times = cell(1);
-        wvf{1,1} = wvf_single_channel;
-        times{1,1} = times_single_channel;
-        save(subsess_file_path, 'wvf', 'times', 'wvf_single_channel', 'times_single_channel');        
+        if endsWith(subsess_filename, "_single_channel.mat")
+            in_file_path = sess_dir + '/' + subsess_filename;
+            load(in_file_path)
+            wvf = cell(1);
+            times = cell(1);
+            wvf{1,1} = wvf_single_channel;
+            times{1,1} = times_single_channel;
+            out_file_path = strrep(in_file_path, "_single_channel", "");
+            save(out_file_path, 'wvf', 'times');
+        end
     end
 end
