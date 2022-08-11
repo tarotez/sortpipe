@@ -15,13 +15,14 @@ for i = 4:size(sess_filenames,2)
         subsess_filename = subsess_filenames{j};
         if endsWith(subsess_filename, ".mat")
             src_file_path = src_sess_dir + '/' + subsess_filename;
-            fprintf("%s\n", src_file_path)                        
-            target_file_path = target_sess_dir + '/' + target_subsess_filename;
-            load(src_file_path)
-            load(target_file_path)
-            fprintf("  -> %s\n", target_file_path)
-            save(target_file_path, 'wvf', 'times', 'Findex', 'TimesBegin');
-        end
-        
+            target_file_path = target_sess_dir + '/' + subsess_filename;
+            if isfile(src_file_path) && isfile(target_file_path)
+                load(src_file_path)
+                load(target_file_path)
+                fprintf("%s\n", src_file_path)              
+                fprintf("  -> %s\n", target_file_path)
+                save(target_file_path, 'wvf', 'times', 'Findex', 'TimesBegin');
+            end
+        end        
     end
 end
