@@ -1,7 +1,7 @@
 
 config_dict = read_config;
 
-src_dir = config_dict('matrix_not_cell_array_dir');
+src_dir = config_dict('behavior_dir');
 target_dir = config_dict('for_stability_analysis_dir');
 sess_filenames = {dir(src_dir).name};
 
