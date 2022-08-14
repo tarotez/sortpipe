@@ -4,15 +4,12 @@ from lib.manage_params import read_config
 #----------------------------------------------------------------------------
 # reorganize (sort) waveforms and spike_times by channels (i.e electrodes).
 # units_byc[channel_id]: a map from spike to cluster (i.e. unit).
-def reorganize_by_prim_elec(waveformsL, times, spike_idsL, prim_elecL):
-    params = read_config()
-    # n_channels = max(prim_elecL) + 1
-    n_channels = params.n_electrodes
+def reorganize_by_prim_elec(waveformsL, times, spike_idsL, prim_elecL, n_electrodes):
     n_samples = waveformsL[0].shape[1]
-    wvf_byc = [np.zeros((0, n_samples)) for _ in range(n_channels)]
+    wvf_byc = [np.zeros((0, n_samples)) for _ in range(n_electrodes)]
     # setting the elements of times_byc and units_byc to be in the 2-D array shape that will be converted to Matlab matrices
-    times_byc = [np.zeros((0), dtype=np.double)[np.newaxis].transpose() for _ in range(n_channels)]
-    units_byc = [np.zeros((0), dtype=np.int16)[np.newaxis].transpose() for _ in range(n_channels)]   # starts from minus one.
+    times_byc = [np.zeros((0), dtype=np.double)[np.newaxis].transpose() for _ in range(n_electrodes)]
+    units_byc = [np.zeros((0), dtype=np.int16)[np.newaxis].transpose() for _ in range(n_electrodes)]   # starts from minus one.
     for cluster_id, (waveforms, spike_ids, prim_elec) in enumerate(zip(waveformsL, spike_idsL, prim_elecL)):
         # print(cluster_id, "", waveforms.shape, "", prim_elec)
         wvf_byc[prim_elec] = np.concatenate((wvf_byc[prim_elec], waveforms), axis=0)
@@ -46,9 +43,9 @@ def renumber_unit_ids_from_global_to_local(units_byc):
     return units_byc_renum
 
 def add_noise_unit_to_empty_channel(wvf_byc, times_byc, units_byc):
-    n_channels = len(wvf_byc)
+    n_electrodes = len(wvf_byc)
     n_samples = wvf_byc[0].shape[1]
-    for channel_id in range(n_channels):
+    for channel_id in range(n_electrodes):
         if wvf_byc[channel_id].shape[0] == 0:
             wvf_byc[channel_id] = np.random.normal(size=(1, n_samples))
             times_byc[channel_id] = np.zeros((1), dtype=np.double)[np.newaxis].transpose()
