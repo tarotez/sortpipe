@@ -1,10 +1,13 @@
 import numpy as np
+from lib.manage_params import read_config
 
 #----------------------------------------------------------------------------
 # reorganize (sort) waveforms and spike_times by channels (i.e electrodes).
 # units_byc[channel_id]: a map from spike to cluster (i.e. unit).
 def reorganize_by_prim_elec(waveformsL, times, spike_idsL, prim_elecL):
-    n_channels = max(prim_elecL) + 1
+    params = read_config()
+    # n_channels = max(prim_elecL) + 1
+    n_channels = params.n_electrodes
     n_samples = waveformsL[0].shape[1]
     wvf_byc = [np.zeros((0, n_samples)) for _ in range(n_channels)]
     # setting the elements of times_byc and units_byc to be in the 2-D array shape that will be converted to Matlab matrices
