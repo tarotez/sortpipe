@@ -20,9 +20,9 @@ for subsession_path in get_unprocessed(params.manually_sorted_dir, params.matrix
         # print(elems)
         if len(elems) > 3:
             print('File name has too many underscores in', src_file)
-            print('It should be SESSIONID_ELECTRODEID.mat or SESSIONID_ELECTRODEID_SUFFIX.mat.')
+            print('It should be SESSIONID_ELECTRODEID.mat or SESSIONID_SUFFIX_ELECTRODEID.mat.')
         if len(elems) == 2 or len(elems) == 3:
-            orig_electrodeID = elems[1]
+            orig_electrodeID = elems[-1]
             new_electrodeID = str(int(orig_electrodeID) + 1)
             trg_file = sessionID + '_el' + new_electrodeID + '_subsess' + subsessionID_without_s + '_single_channel_sort.mat'
             # print(src_file, '->', trg_file)
