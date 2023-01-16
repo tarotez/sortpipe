@@ -5,6 +5,7 @@ from lib.manage_params import read_config
 # reorganize (sort) waveforms and spike_times by channels (i.e electrodes).
 # units_byc[channel_id]: a map from spike to cluster (i.e. unit).
 def reorganize_by_prim_elec(waveformsL, times, spike_idsL, prim_elecL, n_electrodes):
+    assert len(waveformsL) > 0, 'waveformsL is empty. Check if temp_wh.dat is in the kilosorted directory.'
     n_samples = waveformsL[0].shape[1]
     wvf_byc = [np.zeros((0, n_samples)) for _ in range(n_electrodes)]
     # setting the elements of times_byc and units_byc to be in the 2-D array shape that will be converted to Matlab matrices
@@ -14,7 +15,7 @@ def reorganize_by_prim_elec(waveformsL, times, spike_idsL, prim_elecL, n_electro
         # print(cluster_id, "", waveforms.shape, "", prim_elec)
         wvf_byc[prim_elec] = np.concatenate((wvf_byc[prim_elec], waveforms), axis=0)
         spike_num = waveforms.shape[0]
-        if spike_num > 0:            
+        if spike_num > 0:
             times_segment = times[spike_ids,0]
             # print('len(times_segment) =', len(times_segment))
             # setting the elements of times_byc and units_byc to be in the 2-D array shape that will be converted to Matlab matrices
@@ -39,7 +40,7 @@ def renumber_unit_ids_from_global_to_local(units_byc):
         if len(renum) > 0:
             units_byc_renum[channel_id] = np.array(renum, dtype=np.int16)
         # print('for channel_id', channel_id, ' units_byc_renum[channel_id].shape =', units_byc_renum[channel_id].shape)
-        
+
     return units_byc_renum
 
 def add_noise_unit_to_empty_channel(wvf_byc, times_byc, units_byc):
