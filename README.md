@@ -33,17 +33,17 @@ for_stability_analysis_dir, ../../data/forStabilityAnalysis_MNAME
 
 5. Go to File -> Export Per-waveform Data. Select "Matlab file" as Format.
 
-  a. Choose All Channels, All Units, One file per channel.
+    a. Choose All Channels, All Units, One file per channel.
 
-  b. Check "Import unit designation", select a designation. Usually, there's only one choice.
+    b. Check "Import unit designation", select a designation. Usually, there's only one choice.
 
-  c. Removing check marks from PC1 and PC2 can save some disk space.
+    c. Removing check marks from PC1 and PC2 can save some disk space.
 
-  d. Can write out to toPlexonOfflineSorter/sessionXX/subsessionZ/sessionXX.mat, which is the same directory as the input directory.
+    d. Can write out to toPlexonOfflineSorter/sessionXX/subsessionZ/sessionXX.mat, which is the same directory as the input directory.
 
-  e. The output files are "sessionXX_YYY.mat" where "_YYY" indicate channel numbers. Each of this file contains wvf0 (matrix).
+    e. The output files are "sessionXX_YYY.mat" where "_YYY" indicate channel numbers. Each of this file contains wvf0 (matrix).
 
-  f. Sometimes, an error message shows up saying "the file is already opened by Microsoft Excel". In that case, make a new directory and write out there.
+    f. Sometimes, an error message shows up saying "the file is already opened by Microsoft Excel". In that case, make a new directory and write out there.
 
 6. Click plexon2stability.bat on the Desktop. It transorms toPlexonOfflineSorter/sessionXX/subsessionZ/sessionXX_YYY.mat into sessionXX_elYY_subsessZ_single_channel_sort.mat and copies to matrixNotCellArray_MNAME/sessionXX.
 
