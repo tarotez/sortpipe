@@ -58,9 +58,10 @@ for_stability_analysis_dir, ../../data/forStabilityAnalysis_MNAME
 
 11. Merge data by executing the following commands on a command line interface.
 
+```
 cd D:\\Nana_programs_updated\\sortUtils
-
 MergePlx2EDs('D:\\forStabilityAnalysis_MNAME\\', 'n300122');
+```
 
 (The final "\\" of the first argument is required).
 
