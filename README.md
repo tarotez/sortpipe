@@ -60,7 +60,7 @@ for_stability_analysis_dir, ../../data/forStabilityAnalysis_MNAME
 
 10. From Matlab, execute D:\\Nana_programs_updated\\sortUtils\\MergePlx2EDs to merge spike trains and behavioral data to generate files in the directory, plxMergeEDfiles.
 
-11. Merge data by executing the following commands on a command line interface.
+11. Merge data by executing the following commands on a command line interface. The lines generate D:\\forStabilityAnalysis_MNAME\\sessionXX\\plxMergeEDfiles.
 
 ```
 cd D:\\Nana_programs_updated\\sortUtils
@@ -68,7 +68,5 @@ MergePlx2EDs('D:\\forStabilityAnalysis_MNAME\\', 'n300122');
 ```
 
 (The final "\\" of the first argument is required).
-
-It generates D:\\forStabilityAnalysis_MNAME\\sessionXX\\plxMergeEDfiles.
 
 12. From Matlab, execute the stability analysis program, and read D:\\forStabilityAnalysis_MNAME\\sessionXX\\plxMergeEDfiles from the GUI.
