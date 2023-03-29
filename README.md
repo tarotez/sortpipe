@@ -4,22 +4,26 @@
 
 Requires to put a config file (sortpipe_config.csv) in a directory named "config".
 
+```
 sortpipe (this repository)\
 -- mainfunc\
 -- lib\
 config\
 -- sortpipe_config.csv
+```
 
 ## Example config file (sortpipe_config.csv):
 
 MNAME is the monkey identifier, such as Nana32.
 
+```
 sample_rate, 30000\
 n_electrodes, 32\
 kilo_sorted_dir, ../../data/kiloSorted_MNAME\
 plexon_input_dir, ../../data/toPlexonOfflineSorter_MNAME\
 manually_sorted_dir, ../../data/toPlexonOfflineSorter_MNAME\
 for_stability_analysis_dir, ../../data/forStabilityAnalysis_MNAME
+```
 
 ### Data processing pipeline
 
