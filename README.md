@@ -50,7 +50,7 @@ Sample .bat files are in the directory "bat_files". They need to be edited so th
 
     b. times_single_channel -> times (1x1 cell array), then save them in sessionXX_elYY_subsessZ.mat. Also convert wvfY (matrix) in forStabilityAnalysis/sessionXX/sessionXX_elYY_subsessZ_single_channel_sort.mat to wvf (1x1 cell array).
 
-9. Click copy_behavior.bat. It copies behavioral data (EDfiles and Info) in Z:\\prut.lab\\MNAME_DAQ to forStabilityAnalysis//sessionXX. It generates three directories elc_01plx, EDfiles, Info in D:\\forStabilityAnalysis/sessionXX.
+9. Click copy_behavior.bat. It copies behavioral data (EDfiles and Info) in MNAME_DAQ (for example Z:\\prut.lab\\MNAME_DAQ) to forStabilityAnalysis//sessionXX. It generates three directories elc_01plx, EDfiles, Info in D:\\forStabilityAnalysis/sessionXX.
 
 10. From Matlab, execute MNAME_programs_updated\\sortUtils\\MergePlx2EDs to merge spike trains and behavioral data to generate files in the directory, plxMergeEDfiles.
 
