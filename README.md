@@ -24,7 +24,7 @@ Sample .bat files are in the directory "bat_files". They need to be edited so th
 
 3. Click kilo2plexon.bat to write out toPlexonOfflineSorter_MNAME/sessionXX/subsessionZ/sessionXX.mat. It contains waveforms and spike times converted from files in kiloSorted in the Phy format.
 
-4. Start Plexon Offline Sorter. Go to File -> Import -> Spike Data from MATLAB and open toPlexonOfflineSorter_MNAME/sessionXX/subsessionZ/sessionXX.mat files, and do manual sorting.
+4. Start Plexon Offline Sorter. Go to File -> Import -> Spike Data from MATLAB and open toPlexonOfflineSorter_MNAME/sessionXX/subsessionZ/sessionXX.mat files, and do manual sorting if necessary.
 
 5. Go to File -> Export Per-waveform Data. Select "Matlab file" as Format.
 
@@ -50,17 +50,15 @@ Sample .bat files are in the directory "bat_files". They need to be edited so th
 
     b. times_single_channel -> times (1x1 cell array), then save them in sessionXX_elYY_subsessZ.mat. Also convert wvfY (matrix) in forStabilityAnalysis/sessionXX/sessionXX_elYY_subsessZ_single_channel_sort.mat to wvf (1x1 cell array).
 
-9. Click copy_behavior.bat. It copies behavioral data (EDfiles and Info) in MNAME_DAQ (for example Z:\\prut.lab\\MNAME_DAQ) to forStabilityAnalysis//sessionXX. It generates three directories elc_01plx, EDfiles, Info in D:\\forStabilityAnalysis/sessionXX.
+9. Click copy_behavior.bat. It copies behavioral data (EDfiles and Info) in MNAME_DAQ (for example Z:\\prut.lab\\MNAME_DAQ) to forStabilityAnalysis//sessionXX. It also generates three directories elc_01plx, EDfiles, and Info in D:\\forStabilityAnalysis/sessionXX.
 
 10. From Matlab, execute MNAME_programs_updated\\sortUtils\\MergePlx2EDs to merge spike trains and behavioral data to generate files in the directory, plxMergeEDfiles.
 
-11. Merge data by executing the following commands on a command line interface. The lines generate forStabilityAnalysis_MNAME\\sessionXX\\plxMergeEDfiles.
+11. Merge data by executing the following commands on a command line interface. The lines generate forStabilityAnalysis_MNAME\\sessionXX\\plxMergeEDfiles. The final "\\" of the first argument is required.
 
 ```
 cd D:\\MNAME_programs_updated\\sortUtils
 MergePlx2EDs('D:\\forStabilityAnalysis_MNAME\\', 'n300122');
 ```
 
-(The final "\\" of the first argument is required).
-
-12. From Matlab, execute the stability analysis program, and read forStabilityAnalysis_MNAME\\sessionXX\\plxMergeEDfiles from the GUI.
+12. From Matlab, execute the stability analysis program GUI, read forStabilityAnalysis_MNAME\\sessionXX\\plxMergeEDfiles, and do stability analysis.
