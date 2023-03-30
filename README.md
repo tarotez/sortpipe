@@ -53,8 +53,13 @@ for_stability_analysis_dir, ../../data/forStabilityAnalysis_MNAME
 
 7. Click divide_by_channel.bat on the Desktop. It generates matrixNotCellArray_MNAME/sessionXX/sessionXX_elYY_subsessZ_single_channel.mat for each single unit (channel). The mat files contain variables wvf_single_channel and times_single_channel.
 
-8. From Matlab, execute Documents/kilo2plexon/sortpipe/convert_to_1x1_cell_array.m to convert wvf_single_channel (matrix)
- in matrixNotCellArray_MNAME/sessionXX/sessionXX_elYY_subsessZ_single_channel.mat to wvf (1x1 cell array), and times_single_channel to times (1x1 cell array), then save them in sessionXX_elYY_subsessZ.mat. Also convert wvfY (matrix) in forStabilityAnalysis_MNAME/sessionXX/sessionXX_elYY_subsessZ_single_channel_sort.mat to wvf (1x1 cell array).
+8. From Matlab, execute Documents/kilo2plexon/sortpipe/convert_to_1x1_cell_array.m. It does the following conversions.
+
+In matrixNotCellArray_MNAME/sessionXX/sessionXX_elYY_subsessZ_single_channel.mat
+
+    a. wvf_single_channel (matrix) ->  wvf (1x1 cell array)
+
+    b. times_single_channel -> times (1x1 cell array), then save them in sessionXX_elYY_subsessZ.mat. Also convert wvfY (matrix) in forStabilityAnalysis_MNAME/sessionXX/sessionXX_elYY_subsessZ_single_channel_sort.mat to wvf (1x1 cell array).
 
 9. Click copy_behavior.bat on the Desktop. It copies behavioral data (EDfiles and Info) in Z:\\prut.lab\\Nana_DAQ to forStabilityAnalysis_MNAME//sessionXX. It generates three directories elc_01plx, EDfiles, Info in D:\\forStabilityAnalysis_MNAME/sessionXX.
 
