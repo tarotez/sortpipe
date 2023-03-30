@@ -40,7 +40,7 @@ Sample .bat files are in the directory "bat_files". They need to be edited so th
 
     f. Sometimes, an error message shows up saying "the file is already opened by Microsoft Excel". In that case, make a new directory and write out there.
 
-6. Click plexon2stability.bat. It transorms toPlexonOfflineSorter_MNAME/sessionXX/subsessionZ/sessionXX_YYY.mat into sessionXX_elYY_subsessZ_single_channel_sort.mat and copies to matrixNotCellArray/sessionXX.
+6. Click plexon2stability.bat. It reads toPlexonOfflineSorter_MNAME/sessionXX/subsessionZ/sessionXX_YYY.mat and write out  sessionXX_elYY_subsessZ_single_channel_sort.mat into matrixNotCellArray/sessionXX.
 
 7. Click divide_by_channel.bat. It generates matrixNotCellArray_MNAME/sessionXX/sessionXX_elYY_subsessZ_single_channel.mat for each single unit (channel). The mat files contain variables wvf_single_channel and times_single_channel.
 
