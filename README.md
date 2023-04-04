@@ -20,7 +20,7 @@ Sample .bat files are in the directory "batch_examples". They need to be edited 
 
 1.  Run MATLAB/bin_file_generator/createData4Kilo.m to convert recordings to the bin format. The result will be in rawData_MNAME where MNAME is the identifier for the monkey.
 
-2. Run Documents/autokilo to apply kilosort to all files in rawData_MNAME. The result will be in kiloSorted_MNAME. Some of the files are in the Phy format, which cannot be read directly from Matlab. Hence the following steps are necessary for conversion. If running kilosort from GUI, set both the working directory and the final output directory to toPlexonOfflineSorter_MNAME/sessionXX/subsessionZ, such that both "rez.mat" and "temp_wh" files are written out to the same directory.
+2. Run Documents/autokilo to apply kilosort to all files in rawData_MNAME. The result will be in kiloSorted_MNAME. Some of the files are in the Phy format, which cannot be read directly from Matlab. Hence the following steps are necessary for conversion. If running kilosort from GUI, set both the working directory and the final output directory to toPlexonOfflineSorter_MNAME/sessionXX/subsessionZ, such that both "rez.mat" and "temp_wh.dat" files are written out to the same directory.
 
 3. Click kilo2plexon.bat to write out toPlexonOfflineSorter_MNAME/sessionXX/subsessionZ/sessionXX.mat. It contains waveforms and spike times converted from files in kiloSorted in the Phy format.
 
