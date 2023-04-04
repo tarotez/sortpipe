@@ -16,7 +16,7 @@ behavior_dir, ../../data/MNAME
 
 ### Data processing pipeline
 
-Sample .bat files are in the directory "bat_files". They need to be edited so that paths match that of the installed environment.
+Sample .bat files are in the directory "batch_examples". They need to be edited so that the paths match that of the installed environment.
 
 1.  Run MATLAB/bin_file_generator/createData4Kilo.m to convert recordings to the bin format. The result will be in rawData_MNAME where MNAME is the identifier for the monkey.
 
