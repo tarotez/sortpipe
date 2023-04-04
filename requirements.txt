@@ -1,3 +1,4 @@
-numpy==1.23
-hdf5storage
-phy
+numpy==1.23.0
+hdf5storage==0.1.19
+phy==2.0b5
+phylib==2.4.3
