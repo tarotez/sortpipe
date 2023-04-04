@@ -16,13 +16,13 @@ behavior_dir, ../../data/MNAME
 
 ### Data processing pipeline
 
-Sample .bat files are in the directory "batch_examples". They need to be edited so that the paths match that of the installed environment.
+Examples of batch (.bat) files that are referred to in this pipeline are in the directory "batch_examples". They may need to be edited so that the paths match that of the installed environment.
 
-1.  Run MATLAB/bin_file_generator/createData4Kilo.m to convert recordings to the bin format. The result will be in rawData_MNAME where MNAME is the identifier for the monkey.
+1. Run MATLAB/bin_file_generator/createData4Kilo.m to convert recordings to the bin format. The result will be in rawData_MNAME where MNAME is the identifier for the monkey.
 
-2. Run Documents/autokilo to apply kilosort to all files in rawData_MNAME. The result will be in kiloSorted_MNAME. Some of the files are in the Phy format, which cannot be read directly from Matlab. Hence the following steps are necessary for conversion. If running kilosort from GUI, set both the working directory and the final output directory to toPlexonOfflineSorter_MNAME/sessionXX/subsessionZ, such that both "rez.mat" and "temp_wh.dat" files are written out to the same directory.
+2. Either run Kilosort GUI from Matlab, or run Documents/autokilo to apply kilosort to all files in rawData_MNAME. The result should be in the directory, kiloSorted_MNAME. Some of the files are in the Phy format, which cannot be read directly from Matlab. Hence the following steps are necessary for conversion. If running kilosort from GUI, set both the working directory and the final output directory to kiloSorted_MNAME, such that both "rez.mat" and "temp_wh.dat" files are written out to the same directory. The former contains spike times and the latter contains waveforms, both of which are needed for visualization by Plexon Offline Sorter.
 
-3. Click kilo2plexon.bat to write out toPlexonOfflineSorter_MNAME/sessionXX/subsessionZ/sessionXX.mat. It contains waveforms and spike times converted from files in kiloSorted in the Phy format.
+3. Click kilo2plexon.bat to write out toPlexonOfflineSorter_MNAME/sessionXX/subsessionZ/sessionXX.mat. It converts waveforms in "temp_wh.dat" (which is in the Phy format) to a format readable by Plexon Offline Sorter.
 
 4. Start Plexon Offline Sorter. Go to File -> Import -> Spike Data from MATLAB and open toPlexonOfflineSorter_MNAME/sessionXX/subsessionZ/sessionXX.mat files.
 
@@ -30,7 +30,7 @@ Sample .bat files are in the directory "batch_examples". They need to be edited 
 
   b. "Time units" should be set to seconds.
 
-  c. Set "digitizing frequency" to the proper value (such as 30000 Hz). You can check it in rez.mat file's "opt" variable.
+  c. Set "digitizing frequency" to the proper value (such as 30000 Hz). You can check it in "rez.mat" file's "opt" variable.
 
   Once open by Plexon Offline Sorter, do manual sorting if necessary. You can skip the offline sorting procedure, if you think automatic sorting was good enough.
 
@@ -46,7 +46,7 @@ Sample .bat files are in the directory "batch_examples". They need to be edited 
 
     f. The output files are "sessionXX_YYY.mat" where "_YYY" indicate channel numbers. Each of this file contains wvf0 (matrix).
 
-6. Click plexon2stability.bat. It reads toPlexonOfflineSorter_MNAME/sessionXX/subsessionZ/sessionXX_YYY.mat and write out  sessionXX_elYY_subsessZ_single_channel_sort.mat into matrixNotCellArray/sessionXX.
+6. Click plexon2stability.bat. It reads toPlexonOfflineSorter_MNAME/sessionXX/subsessionZ/sessionXX_YYY.mat and write out "sessionXX_elYY_subsessZ_single_channel_sort.mat" into the directory, matrixNotCellArray/sessionXX.
 
 7. Click divide_by_channel.bat. It generates matrixNotCellArray_MNAME/sessionXX/sessionXX_elYY_subsessZ_single_channel.mat for each single unit (channel). The mat files contain variables wvf_single_channel and times_single_channel.
 
@@ -60,7 +60,7 @@ Sample .bat files are in the directory "batch_examples". They need to be edited 
 
 10. From Matlab, execute sortUtils\\MergePlx2EDs to merge spike trains and behavioral data. The output will be in the directory, plxMergeEDfiles.
 
-11. Merge data by executing the following commands on a command line interface. The lines generate forStabilityAnalysis_MNAME\\sessionXX\\plxMergeEDfiles. The final "\\" of the first argument is required.
+11. Merge data by executing the following commands on a command line interface. The lines generate forStabilityAnalysis_MNAME\\sessionXX\\plxMergeEDfiles. The final "\\" in the first argument is required.
 
 ```
 cd D:\\MNAME_programs_updated\\sortUtils
