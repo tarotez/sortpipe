@@ -3,14 +3,18 @@ config_dict = read_config;
 
 src_dir = config_dict('matrix_not_cell_array_dir');
 target_dir = config_dict('for_stability_analysis_dir');
-sess_filenames = {dir(src_dir).name};
+%%% sess_filenames = {dir(src_dir).name};
+src_dir_struct = dir(src_dir);
+sess_filenames = {src_dir_struct.name};
 
 for i = 4:size(sess_filenames,2)
     sess_filename = sess_filenames{i};
     src_sess_dir = src_dir + "/" + sess_filename + "/elc_01plx";
     target_sess_dir = target_dir + "/" + sess_filename + "/elc_01plx";
     
-    subsess_filenames = {dir(src_sess_dir).name};
+    %%% subsess_filenames = {dir(src_sess_dir).name};
+    src_sess_dir_struct = dir(src_sess_dir);
+    subsess_filenames = {src_sess_dir_struct.name};
     
     for j = 3:size(subsess_filenames,2)    
         subsess_filename = subsess_filenames{j};

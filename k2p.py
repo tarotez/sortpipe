@@ -12,7 +12,7 @@ for subsession_path in get_unprocessed(params.kilo_sorted_dir, params.plexon_inp
     make_directories(params.plexon_input_dir + '/' + subsession_path)
     in_path = params.kilo_sorted_dir + '/' + subsession_path
     out_path = params.plexon_input_dir + '/' + subsession_path + '/' + sessionID + '.mat'
-    converted = convert(in_path, np.double(params.sample_rate), int(params.n_electrodes), np.double(params.wvf_amplitude_scaling))
+    converted, primary_electrodeL = convert(in_path, np.double(params.sample_rate), int(params.n_electrodes), np.double(params.wvf_amplitude_scaling))
 
     # print('the size of the wvf is', getsizeof(converted['wvf']))
     # if getsizeof(converted['wvf']) < 1000 * 1000 * 1000:

@@ -1,5 +1,23 @@
 import numpy as np
-from lib.manage_params import read_config
+# from lib.manage_params import read_config
+
+#----------------------------------------------------------------------------
+# reorganize (sort) waveforms and spike_times by channels (i.e electrodes).
+# units_byc[channel_id]: a map from spike to cluster (i.e. unit).
+# def reorganize_times_by_prim_elec(times, spike_idsL, prim_elecL, n_electrodes):
+#     # setting the elements of times_byc and units_byc to be in the 2-D array shape that will be converted to Matlab matrices
+#     times_byc = [np.zeros((0), dtype=np.double)[np.newaxis].transpose() for _ in range(n_electrodes)]
+#     units_byc = [np.zeros((0), dtype=np.int16)[np.newaxis].transpose() for _ in range(n_electrodes)]   # starts from minus one.
+#     for cluster_id, (spike_ids, prim_elec) in enumerate(zip(spike_idsL, prim_elecL)):
+#         # print(cluster_id, "", waveforms.shape, "", prim_elec)
+#         spike_num = waveforms.shape[0]
+#         if spike_num > 0:
+#             times_segment = times[spike_ids,0]
+#             # print('len(times_segment) =', len(times_segment))
+#             # setting the elements of times_byc and units_byc to be in the 2-D array shape that will be converted to Matlab matrices
+#             times_byc[prim_elec] = np.concatenate((times_byc[prim_elec], times_segment[np.newaxis].transpose()), axis=0)
+#             units_byc[prim_elec] = np.concatenate((units_byc[prim_elec], np.array([cluster_id] * spike_num, dtype=np.int16)[np.newaxis].transpose()), axis=0)
+#     return times_byc, units_byc
 
 #----------------------------------------------------------------------------
 # reorganize (sort) waveforms and spike_times by channels (i.e electrodes).
