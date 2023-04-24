@@ -1,7 +1,6 @@
 import numpy as np
 from scipy.io import savemat as scipy_savemat
 from hdf5storage import savemat as hdf5_savemat
-# from hdf5storage import loadmat as hdf5_loadmat
 from mainfunc.converter import convert
 from lib.manage_params import read_config
 from lib.manage_files import get_unprocessed, make_directories
