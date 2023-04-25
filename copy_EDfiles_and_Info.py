@@ -17,7 +17,8 @@ for subsession_path in get_existing(params.behavior_dir, params.for_stability_an
     # print('sessionID = ', sessionID)
     
     src_dir = params.behavior_dir + '/' + sessionID + '/'
-    trg_dir = params.for_stability_analysis_dir + '/' + sessionID + '/'
+    # trg_dir = params.for_stability_analysis_dir + '/' + sessionID + '/'
+    trg_dir = params.for_stability_analysis_dir + '/' + subsession_path + '/'
     # make_directories(trg_dir)
 
     edf_src = src_dir + edf_dirName
