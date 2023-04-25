@@ -33,7 +33,7 @@ for subsession_path in get_unprocessed(params.kilo_sorted_dir, params.for_stabil
     ###
     with open(primary_electrode_path, 'w') as fH:
         for unitID, electrodeID in  enumerate(primary_electrodeL):
-            fH.write(str(unitID + 1) + ', ' + str(electrodeID + 1))
+            fH.write(str(unitID + 1) + ', ' + str(electrodeID + 1) + '\n')
 
 # for subsession_path in get_unprocessed(params.plexon_input_dir, params.matrix_not_cell_array_dir, '.mat'):
 
