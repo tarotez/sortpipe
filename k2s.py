@@ -29,9 +29,9 @@ for subsession_path in get_unprocessed(params.kilo_sorted_dir, params.for_stabil
     # write out primary_electrodeL
     ###
     ### out_path = params.for_stability_analysis_dir + '/' + subsession_path + '/' + sessionID + '.mat'
-    primary_electrode_path = params.for_stability_analysis_dir + '/' + subsession_path + '/' + sessionID + '.csv'
+    primary_electrode_path = params.for_stability_analysis_dir + '/' + subsession_path + '/' + sessionID + '_unit2chan.csv'
     ###
-    with open(primary_electrode_path, 'r') as fH:
+    with open(primary_electrode_path, 'w') as fH:
         for unitID, electrodeID in  enumerate(primary_electrodeL):
             fH.write(str(unitID + 1) + ', ' + str(electrodeID + 1))
 
