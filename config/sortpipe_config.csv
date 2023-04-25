@@ -1,5 +1,5 @@
 sample_rate, 30000
-n_electrodes, 32
+n_electrodes, 128
 wvf_amplitude_scaling, 0.2
 kilo_sorted_dir, ../data/kiloSorted_MNAME
 plexon_input_dir, ../data/toPlexonOfflineSorter_MNAME
