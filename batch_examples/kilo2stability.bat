@@ -1,5 +1,5 @@
 ECHO ON
-cd D:\KILOSORT\kilo2plexon\sortpipe
+cd D:\KILOSORT\sortpipe
 D:
 python k2s.py
 ECHO 'conversion finished!'
