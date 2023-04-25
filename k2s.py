@@ -58,10 +58,10 @@ for subsession_path in get_unprocessed(params.kilo_sorted_dir, params.for_stabil
     for orig_electrodeID in range(len(wvf_byc)):
         # print('times.shape =', times[orig_electrodeID].shape)
         
-        print('wvf_byc[0].shape =', wvf_byc[0].shape)
-        print('wvf_byc[1].shape =', wvf_byc[1].shape)
-        print('times_byc[0].shape =', times_byc[0].shape)
-        print('times_byc[1].shape =', times_byc[1].shape)
+        # print('wvf_byc[0].shape =', wvf_byc[0].shape)
+        # print('wvf_byc[1].shape =', wvf_byc[1].shape)
+        # print('times_byc[0].shape =', times_byc[0].shape)
+        # print('times_byc[1].shape =', times_byc[1].shape)
 
         # n_samples = wvf_byc[0].shape[1]
         # wvf_1by1 = [[np.zeros((0, n_samples), dtype=np.double)]]
