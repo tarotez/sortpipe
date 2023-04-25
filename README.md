@@ -37,8 +37,8 @@ Examples of batch (.bat) files that are referred to in this pipeline are in the 
 7. Merge data by executing the following commands on a command line interface. The lines generate forStabilityAnalysis_MNAME\\sessionXX\\plxMergeEDfiles. The final "\\" in the first argument is required.
 
 ```
-cd D:\\MNAME_programs_updated\\sortUtils
-MergePlx2EDs('D:\\forStabilityAnalysis_MNAME\\', 'n300122');
+cd D:\\KILOSORT\\sortUtils
+MergePlx2EDs('D:\\KILOSORT\\data\\forStabilityAnalysis_MNAME\\', 'n220223\\s1');
 ```
 
 8. From Matlab, execute the stability analysis program GUI, read forStabilityAnalysis_MNAME\\sessionXX\\plxMergeEDfiles, and do stability analysis.
