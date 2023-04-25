@@ -30,18 +30,16 @@ Examples of batch (.bat) files that are referred to in this pipeline are in the 
 
     b. times_single_channel -> times (1x1 cell array), then save them in sessionXX_elYY_subsessZ.mat. Also convert wvfY (matrix) in forStabilityAnalysis/sessionXX/sessionXX_elYY_subsessZ_single_channel_sort.mat to wvf (1x1 cell array).
 
-5. Click copy_behavior.bat. It copies behavioral data (EDfiles and Info) in behavior_dir (for example Z:\\prut.lab\\MNAME_DAQ or ../../data/MNAME) to forStabilityAnalysis//sessionXX. It also generates three directories elc_01plx, EDfiles, and Info in D:\\forStabilityAnalysis/sessionXX.
+5. Click copy_behavior.bat. It copies behavioral data (EDfiles and Info) in behavior_dir (for example Z:\\prut.lab\\MNAME_DAQ or ../data/MNAME) to forStabilityAnalysis//sessionXX. It also generates three directories elc_01plx, EDfiles, and Info in D:\\forStabilityAnalysis/sessionXX.
 
-6. From Matlab, execute sortUtils\\MergePlx2EDs to merge spike trains and behavioral data. The output will be in the directory, plxMergeEDfiles.
-
-7. Merge data by executing the following commands on a command line interface. The lines generate forStabilityAnalysis_MNAME\\sessionXX\\plxMergeEDfiles. The final "\\" in the first argument is required.
+6. From Matlab, merge neural and behavioral data by executing the following commands on the command line interface. The output will be in forStabilityAnalysis_MNAME\\sessionXX\\plxMergeEDfiles. The final "\\" in the first argument is required.
 
 ```
 cd D:\\KILOSORT\\sortUtils
 MergePlx2EDs('D:\\KILOSORT\\data\\forStabilityAnalysis_MNAME\\', 'n220223\\s1');
 ```
 
-8. From Matlab, execute the stability analysis program GUI, read forStabilityAnalysis_MNAME\\sessionXX\\plxMergeEDfiles, and do stability analysis.
+7. From Matlab, execute the stability analysis program GUI, read forStabilityAnalysis_MNAME\\sessionXX\\plxMergeEDfiles, and do stability analysis.
 
 
 ### Data processing pipeline with manual sorting by Plexon Offline Sorter
