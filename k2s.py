@@ -35,7 +35,7 @@ for subsession_path in get_unprocessed(params.kilo_sorted_dir, params.for_stabil
         for unitID, electrodeID in  enumerate(primary_electrodeL):
             fH.write(str(unitID + 1) + ', ' + str(electrodeID + 1) + '\n')
 
-# for subsession_path in get_unprocessed(params.plexon_input_dir, params.matrix_not_cell_array_dir, '.mat'):
+for subsession_path in get_unprocessed(params.for_stability_analysis_dir, params.matrix_not_cell_array_dir, '.mat'):
 
     print('subsession_path =', subsession_path)
     sessionID, subsessionID = subsession_path.split('/')
@@ -50,18 +50,17 @@ for subsession_path in get_unprocessed(params.kilo_sorted_dir, params.for_stabil
     ### times_byc = orig_dict['times']
     wvf_byc = converted['wvf']
     times_byc = converted['times']
-    print('times_byc =')
-    print(times_byc)
-    # print('times.shape =', times_byc.shape)
+    # print('times_byc =')
+    # print(times_byc)
+    # print('times_byc.shape =', times_byc.shape)
     print('len(wvf_byc) =', len(wvf_byc))
 
     for orig_electrodeID in range(len(wvf_byc)):
-        # print('times.shape =', times[orig_electrodeID].shape)
         
-        # print('wvf_byc[0].shape =', wvf_byc[0].shape)
-        # print('wvf_byc[1].shape =', wvf_byc[1].shape)
-        # print('times_byc[0].shape =', times_byc[0].shape)
-        # print('times_byc[1].shape =', times_byc[1].shape)
+        print('wvf_byc[0].shape =', wvf_byc[0].shape)
+        print('wvf_byc[1].shape =', wvf_byc[1].shape)
+        print('times_byc[0].shape =', times_byc[0].shape)
+        print('times_byc[1].shape =', times_byc[1].shape)
 
         # n_samples = wvf_byc[0].shape[1]
         # wvf_1by1 = [[np.zeros((0, n_samples), dtype=np.double)]]
@@ -82,6 +81,7 @@ for subsession_path in get_unprocessed(params.kilo_sorted_dir, params.for_stabil
         new_electrodeID = str(orig_electrodeID + 1)
         trg_fileName = sessionID + '_el' + new_electrodeID + '_subsess' + subsessionID_without_s + '_single_channel.mat'
         trg_path = trg_dir + '/' + trg_fileName
+        print('divided =', divided)
         print(src_path, '->', trg_path)
         scipy_savemat(trg_path, divided)
         # hdf5_savemat(trg_path, divided, format='7.3', oned_as='column')
