@@ -1,6 +1,7 @@
 import numpy as np
 from scipy.io import savemat as scipy_savemat
 from hdf5storage import savemat as hdf5_savemat
+from hdf5storage import loadmat as hdf5_loadmat
 from mainfunc.converter import convert
 from lib.manage_params import read_config
 from lib.manage_files import get_unprocessed, make_directories
@@ -8,7 +9,7 @@ from lib.manage_files import get_unprocessed, make_directories
 params = read_config()
 primary_electrodeL_by_subsession = []
 for subsession_path in get_unprocessed(params.kilo_sorted_dir, params.for_stability_analysis_dir, '.mat'):
-    print('subsession_path =', subsession_path)
+    print('kilo_sorted -> stability, subsession_path =', subsession_path)
     sessionID = subsession_path.split('/')[0]
     make_directories(params.for_stability_analysis_dir + '/' + subsession_path)
     in_path = params.kilo_sorted_dir + '/' + subsession_path
@@ -36,6 +37,10 @@ for subsession_path in get_unprocessed(params.kilo_sorted_dir, params.for_stabil
             fH.write(str(unitID + 1) + ', ' + str(electrodeID + 1) + '\n')
 
 for subsession_path in get_unprocessed(params.for_stability_analysis_dir, params.matrix_not_cell_array_dir, '.mat'):
+    print('stability -> matrix_not_cell_array, subsession_path =', subsession_path)
+    sessionID = subsession_path.split('/')[0]
+    in_path = params.for_stability_analysis_dir + '/' + subsession_path + '/' + sessionID + '.mat'
+    converted = hdf5_loadmat(in_path, format='7.3', oned_as='column')
 
     print('subsession_path =', subsession_path)
     sessionID, subsessionID = subsession_path.split('/')
