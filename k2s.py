@@ -12,12 +12,12 @@ params = read_config()
 
 # convert phy file into matlab format
 primary_electrodeL_by_subsession = []
-for subsession_path in get_unprocessed(params.kilo_sorted_dir, params.for_stability_analysis_dir, '.mat'):
-    print('kilo_sorted -> stability, subsession_path =', subsession_path)
+for subsession_path in get_unprocessed(params.kilo_sorted_dir, params.plexon_input_dir, '.mat'):
+    print('kilo_sorted -> plexon_input_dir, subsession_path =', subsession_path)
     sessionID = subsession_path.split('/')[0]
-    make_directories(params.for_stability_analysis_dir + '/' + subsession_path)
+    make_directories(params.plexon_input_dir + '/' + subsession_path)
     in_path = params.kilo_sorted_dir + '/' + subsession_path
-    out_path = params.for_stability_analysis_dir + '/' + subsession_path + '/' + sessionID + '.mat'
+    out_path = params.plexon_input_dir + '/' + subsession_path + '/' + sessionID + '.mat'
     converted, primary_electrodeL = convert(in_path, np.double(params.sample_rate), int(params.n_electrodes), np.double(params.wvf_amplitude_scaling))    
     primary_electrodeL_by_subsession.append(primary_electrodeL)
     # print('the size of the wvf is', getsizeof(converted['wvf']))
@@ -40,11 +40,39 @@ for subsession_path in get_unprocessed(params.kilo_sorted_dir, params.for_stabil
         for unitID, electrodeID in  enumerate(primary_electrodeL):
             fH.write(str(unitID + 1) + ', ' + str(electrodeID + 1) + '\n')
 
+# rename and copy sessionXX/subsessionZ/sessionXX_YYY.mat to sessionXX_elYY_subsessZ_single_channel_sort.mat
+for subsession_path in get_unprocessed(params.plexon_input_dir, params.matrix_not_cell_array_dir, '.mat'):
+    print('sessionXX_YYY.mat -> sessionXX_elYY_subsessZ_single_channel_sort.mat, subsession_path =', subsession_path)
+    src_dir = params.plexon_input_dir + '/' + subsession_path
+    sessionID, subsessionID = subsession_path.split('/')
+    subsessionID_without_s = subsessionID[1:]
+    trg_dir = params.matrix_not_cell_array_dir + '/' + sessionID + '/elc_01plx'
+    make_directories(trg_dir)
+
+    for src_file in listdir(src_dir):        
+        print('src_file =', src_file)
+        src_path = src_dir + '/' + src_file
+        elems = src_file.split('.')[0].split('_')
+        # print(elems)
+        if len(elems) > 3:
+            print('File name has too many underscores in', src_file)
+            print('Its format should be SESSIONID_ELECTRODEID.mat or SESSIONID_SUFFIX_ELECTRODEID.mat.')
+        if len(elems) == 2 or len(elems) == 3:
+            orig_electrodeID = elems[-1]
+            print('orig_electrodeID =', orig_electrodeID)
+            new_electrodeID = str(int(orig_electrodeID) + 1)
+            trg_file = sessionID + '_el' + new_electrodeID + '_subsess' + subsessionID_without_s + '_single_channel_sort.mat'
+            # print(src_file, '->', trg_file)
+            trg_path = trg_dir + '/' + trg_file
+            print(src_path, '->', trg_path)
+            # sh.move(src_path, trg_path)
+            sh.copyfile(src_path, trg_path)
+
 # divide into chennels (one file for one channel, i.e. electrode)
-for subsession_path in get_unprocessed(params.for_stability_analysis_dir, params.matrix_not_cell_array_dir, '.mat'):
+for subsession_path in get_unprocessed(params.plexon_input_dir, params.matrix_not_cell_array_dir, '.mat'):
     print('stability -> matrix_not_cell_array, subsession_path =', subsession_path)
     sessionID = subsession_path.split('/')[0]
-    in_path = params.for_stability_analysis_dir + '/' + subsession_path + '/' + sessionID + '.mat'
+    in_path = params.plexon_input_dir + '/' + subsession_path + '/' + sessionID + '.mat'
     converted = hdf5_loadmat(in_path, format='7.3', oned_as='column')
 
     print('subsession_path =', subsession_path)
@@ -96,30 +124,3 @@ for subsession_path in get_unprocessed(params.for_stability_analysis_dir, params
         scipy_savemat(trg_path, divided)
         # hdf5_savemat(trg_path, divided, format='7.3', oned_as='column')
 
-# rename and copy sessionXX/subsessionZ/sessionXX_YYY.mat to sessionXX_elYY_subsessZ_single_channel_sort.mat
-for subsession_path in get_unprocessed(params.for_stability_analysis_dir, params.matrix_not_cell_array_dir, '.mat'):
-    print('sessionXX_YYY.mat -> sessionXX_elYY_subsessZ_single_channel_sort.mat, subsession_path =', subsession_path)
-    src_dir = params.for_stability_analysis_dir + '/' + subsession_path
-    sessionID, subsessionID = subsession_path.split('/')
-    subsessionID_without_s = subsessionID[1:]
-    trg_dir = params.matrix_not_cell_array_dir + '/' + sessionID + '/elc_01plx'
-    make_directories(trg_dir)
-
-    for src_file in listdir(src_dir):        
-        print('src_file =', src_file)
-        src_path = src_dir + '/' + src_file
-        elems = src_file.split('.')[0].split('_')
-        # print(elems)
-        if len(elems) > 3:
-            print('File name has too many underscores in', src_file)
-            print('Its format should be SESSIONID_ELECTRODEID.mat or SESSIONID_SUFFIX_ELECTRODEID.mat.')
-        if len(elems) == 2 or len(elems) == 3:
-            orig_electrodeID = elems[-1]
-            print('orig_electrodeID =', orig_electrodeID)
-            new_electrodeID = str(int(orig_electrodeID) + 1)
-            trg_file = sessionID + '_el' + new_electrodeID + '_subsess' + subsessionID_without_s + '_single_channel_sort.mat'
-            # print(src_file, '->', trg_file)
-            trg_path = trg_dir + '/' + trg_file
-            print(src_path, '->', trg_path)
-            # sh.move(src_path, trg_path)
-            sh.copyfile(src_path, trg_path)
