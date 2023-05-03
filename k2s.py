@@ -95,7 +95,7 @@ for subsession_path in get_unprocessed(params.for_stability_analysis_dir, params
         # hdf5_savemat(trg_path, divided, format='7.3', oned_as='column')
 
 # rename and copy sessionXX/subsessionZ/sessionXX_YYY.mat to sessionXX_elYY_subsessZ_single_channel_sort.mat
-for subsession_path in get_unprocessed(params.manually_sorted_dir, params.matrix_not_cell_array_dir, '.mat'):
+for subsession_path in get_unprocessed(params.matrix_not_cell_array_dir, params.matrix_not_cell_array_dir, '.mat'):
     print('sessionXX_YYY.mat -> sessionXX_elYY_subsessZ_single_channel_sort.mat, subsession_path =', subsession_path)
     src_dir = params.manually_sorted_dir + '/' + subsession_path
     sessionID, subsessionID = subsession_path.split('/')
