@@ -35,7 +35,9 @@ for subsession_path in get_unprocessed(in_dir_for_conversion, out_dir_for_conver
 
     # write out primary_electrodeL
     ### out_path = params.for_stability_analysis_dir + '/' + subsession_path + '/' + sessionID + '.mat'
-    primary_electrode_path = params.for_stability_analysis_dir + '/' + subsession_path + '/' + sessionID + '_unit2chan.csv'
+    primary_electrode_dir = params.for_stability_analysis_dir + '/' + subsession_path
+    primary_electrode_path = primary_electrode_dir + '/' + sessionID + '_unit2chan.csv'
+    make_directories(primary_electrode_dir)
     with open(primary_electrode_path, 'w') as fH:
         for unitID, electrodeID in  enumerate(primary_electrodeL):
             fH.write(str(unitID + 1) + ', ' + str(electrodeID + 1) + '\n')
