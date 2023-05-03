@@ -9,6 +9,8 @@ from lib.manage_params import read_config
 from lib.manage_files import get_unprocessed, make_directories
 
 params = read_config()
+
+# convert phy file into matlab format
 primary_electrodeL_by_subsession = []
 for subsession_path in get_unprocessed(params.kilo_sorted_dir, params.for_stability_analysis_dir, '.mat'):
     print('kilo_sorted -> stability, subsession_path =', subsession_path)
@@ -95,23 +97,25 @@ for subsession_path in get_unprocessed(params.for_stability_analysis_dir, params
         # hdf5_savemat(trg_path, divided, format='7.3', oned_as='column')
 
 # rename and copy sessionXX/subsessionZ/sessionXX_YYY.mat to sessionXX_elYY_subsessZ_single_channel_sort.mat
-for subsession_path in get_unprocessed(params.matrix_not_cell_array_dir, params.matrix_not_cell_array_dir, '.mat'):
+for subsession_path in get_unprocessed(params.for_stability_analysis_dir, params.matrix_not_cell_array_dir, '.mat'):
     print('sessionXX_YYY.mat -> sessionXX_elYY_subsessZ_single_channel_sort.mat, subsession_path =', subsession_path)
-    src_dir = params.manually_sorted_dir + '/' + subsession_path
+    src_dir = params.for_stability_analysis_dir + '/' + subsession_path
     sessionID, subsessionID = subsession_path.split('/')
     subsessionID_without_s = subsessionID[1:]
     trg_dir = params.matrix_not_cell_array_dir + '/' + sessionID + '/elc_01plx'
     make_directories(trg_dir)
 
     for src_file in listdir(src_dir):        
-        src_path = src_dir + '/' + src_file        
+        print('src_file =', src_file)
+        src_path = src_dir + '/' + src_file
         elems = src_file.split('.')[0].split('_')
         # print(elems)
         if len(elems) > 3:
             print('File name has too many underscores in', src_file)
-            print('It should be SESSIONID_ELECTRODEID.mat or SESSIONID_SUFFIX_ELECTRODEID.mat.')
+            print('Its format should be SESSIONID_ELECTRODEID.mat or SESSIONID_SUFFIX_ELECTRODEID.mat.')
         if len(elems) == 2 or len(elems) == 3:
             orig_electrodeID = elems[-1]
+            print('orig_electrodeID =', orig_electrodeID)
             new_electrodeID = str(int(orig_electrodeID) + 1)
             trg_file = sessionID + '_el' + new_electrodeID + '_subsess' + subsessionID_without_s + '_single_channel_sort.mat'
             # print(src_file, '->', trg_file)
