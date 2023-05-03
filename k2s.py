@@ -12,12 +12,14 @@ params = read_config()
 
 # convert phy file into matlab format
 primary_electrodeL_by_subsession = []
-for subsession_path in get_unprocessed(params.kilo_sorted_dir, params.plexon_input_dir, '.mat'):
+in_dir_for_conversion = params.kilo_sorted_dir
+out_dir_for_conversion = params.plexon_input_dir
+for subsession_path in get_unprocessed(in_dir_for_conversion, out_dir_for_conversion, '.mat'):
     print('kilo_sorted -> plexon_input_dir, subsession_path =', subsession_path)
     sessionID = subsession_path.split('/')[0]
-    make_directories(params.plexon_input_dir + '/' + subsession_path)
-    in_path = params.kilo_sorted_dir + '/' + subsession_path
-    out_path = params.plexon_input_dir + '/' + subsession_path + '/' + sessionID + '.mat'
+    make_directories(out_dir_for_conversion + '/' + subsession_path)
+    in_path = in_dir_for_conversion + '/' + subsession_path
+    out_path = out_dir_for_conversion + '/' + subsession_path + '/' + sessionID + '.mat'
     converted, primary_electrodeL = convert(in_path, np.double(params.sample_rate), int(params.n_electrodes), np.double(params.wvf_amplitude_scaling))    
     primary_electrodeL_by_subsession.append(primary_electrodeL)
     # print('the size of the wvf is', getsizeof(converted['wvf']))
@@ -32,21 +34,21 @@ for subsession_path in get_unprocessed(params.kilo_sorted_dir, params.plexon_inp
     # hdf5_savemat(out_path, times_units_electrodes, format='7.3', oned_as='column')
 
     # write out primary_electrodeL
-    ###
     ### out_path = params.for_stability_analysis_dir + '/' + subsession_path + '/' + sessionID + '.mat'
     primary_electrode_path = params.for_stability_analysis_dir + '/' + subsession_path + '/' + sessionID + '_unit2chan.csv'
-    ###
     with open(primary_electrode_path, 'w') as fH:
         for unitID, electrodeID in  enumerate(primary_electrodeL):
             fH.write(str(unitID + 1) + ', ' + str(electrodeID + 1) + '\n')
 
 # rename and copy sessionXX/subsessionZ/sessionXX_YYY.mat to sessionXX_elYY_subsessZ_single_channel_sort.mat
-for subsession_path in get_unprocessed(params.plexon_input_dir, params.matrix_not_cell_array_dir, '.mat'):
+in_dir_for_copying = params.plexon_input_dir
+out_dir_for_copying = params.matrix_not_cell_array_dir
+for subsession_path in get_unprocessed(in_dir_for_copying, out_dir_for_copying, '.mat'):
     print('sessionXX_YYY.mat -> sessionXX_elYY_subsessZ_single_channel_sort.mat, subsession_path =', subsession_path)
-    src_dir = params.plexon_input_dir + '/' + subsession_path
+    src_dir = in_dir_for_copying + '/' + subsession_path
     sessionID, subsessionID = subsession_path.split('/')
     subsessionID_without_s = subsessionID[1:]
-    trg_dir = params.matrix_not_cell_array_dir + '/' + sessionID + '/elc_01plx'
+    trg_dir = out_dir_for_copying + '/' + sessionID + '/elc_01plx'
     make_directories(trg_dir)
 
     for src_file in listdir(src_dir):        
@@ -69,18 +71,20 @@ for subsession_path in get_unprocessed(params.plexon_input_dir, params.matrix_no
             sh.copyfile(src_path, trg_path)
 
 # divide into chennels (one file for one channel, i.e. electrode)
-for subsession_path in get_unprocessed(params.plexon_input_dir, params.matrix_not_cell_array_dir, '.mat'):
+in_dir_for_division = params.plexon_input_dir
+out_dir_for_division = params.matrix_not_cell_array_dir
+for subsession_path in get_unprocessed(in_dir_for_division, out_dir_for_division, '.mat'):
     print('stability -> matrix_not_cell_array, subsession_path =', subsession_path)
     sessionID = subsession_path.split('/')[0]
-    in_path = params.plexon_input_dir + '/' + subsession_path + '/' + sessionID + '.mat'
+    in_path = in_dir_for_division + '/' + subsession_path + '/' + sessionID + '.mat'
     converted = hdf5_loadmat(in_path, format='7.3', oned_as='column')
 
     print('subsession_path =', subsession_path)
     sessionID, subsessionID = subsession_path.split('/')
     subsessionID_without_s = subsessionID[1:]
-    src_path = params.plexon_input_dir + '/' + subsession_path + '/' + sessionID + '.mat'
-    ### trg_dir = params.matrix_not_cell_array_dir + '/' + sessionID + '/elc_01plx'
-    trg_dir = params.matrix_not_cell_array_dir + '/' + sessionID + '/' + subsessionID + '/elc_01plx'
+    src_path = in_dir_for_division + '/' + subsession_path + '/' + sessionID + '.mat'
+    ### trg_dir = out_dir_for_division + '/' + sessionID + '/elc_01plx'
+    trg_dir = out_dir_for_division + '/' + sessionID + '/' + subsessionID + '/elc_01plx'
     make_directories(trg_dir)
 
     ### orig_dict = hdf5_loadmat(src_path)
