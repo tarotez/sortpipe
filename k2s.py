@@ -42,39 +42,39 @@ for subsession_path in get_unprocessed(in_dir_for_conversion, out_dir_for_conver
         for unitID, electrodeID in  enumerate(primary_electrodeL):
             fH.write(str(unitID + 1) + ', ' + str(electrodeID + 1) + '\n')
 
-# rename and copy sessionXX/subsessionZ/sessionXX_YYY.mat to sessionXX_elYY_subsessZ_single_channel_sort.mat
-in_dir_for_copying = params.plexon_input_dir
-out_dir_for_copying = params.matrix_not_cell_array_dir
-# for subsession_path in get_unprocessed(in_dir_for_copying, out_dir_for_copying, '_sort.mat'):
-for subsession_path in get_all_paths(in_dir_for_copying):    
-    print('sessionXX_YYY.mat -> sessionXX_elYY_subsessZ_single_channel_sort.mat, subsession_path =', subsession_path)
-    src_dir = in_dir_for_copying + '/' + subsession_path
-    sessionID, subsessionID = subsession_path.split('/')
-    in_path = src_dir + '/' + sessionID + '.mat'
-    subsessionID_without_s = subsessionID[1:]
-    # trg_dir = out_dir_for_copying + '/' + sessionID + '/elc_01plx'
-    trg_dir = out_dir_for_copying + '/' + sessionID + '/' + subsessionID + '/elc_01plx'
-    print('src_dir =', src_dir)
-    print('trg_dir =', trg_dir)
-    make_directories(trg_dir)
-    for src_file in listdir(src_dir):
-        print('src_file =', src_file)
-        src_path = src_dir + '/' + src_file
-        elems = src_file.split('.')[0].split('_')
-        # print(elems)
-        if len(elems) > 3:
-            print('File name has too many underscores in', src_file)
-            print('Its format should be SESSIONID_ELECTRODEID.mat or SESSIONID_SUFFIX_ELECTRODEID.mat.')
-        if len(elems) == 2 or len(elems) == 3:
-            orig_electrodeID = elems[-1]
-            print('orig_electrodeID =', orig_electrodeID)
-            new_electrodeID = str(int(orig_electrodeID) + 1)
-            trg_file = sessionID + '_el' + new_electrodeID + '_subsess' + subsessionID_without_s + '_single_channel_sort.mat'
-            # print(src_file, '->', trg_file)
-            trg_path = trg_dir + '/' + trg_file
-            print(src_path, '->', trg_path)
-            # sh.move(src_path, trg_path)
-            sh.copyfile(src_path, trg_path)
+# # rename and copy sessionXX/subsessionZ/sessionXX_YYY.mat to sessionXX_elYY_subsessZ_single_channel_sort.mat
+# in_dir_for_copying = params.plexon_input_dir
+# out_dir_for_copying = params.matrix_not_cell_array_dir
+# # for subsession_path in get_unprocessed(in_dir_for_copying, out_dir_for_copying, '_sort.mat'):
+# for subsession_path in get_all_paths(in_dir_for_copying):    
+#     print('sessionXX_YYY.mat -> sessionXX_elYY_subsessZ_single_channel_sort.mat, subsession_path =', subsession_path)
+#     src_dir = in_dir_for_copying + '/' + subsession_path
+#     sessionID, subsessionID = subsession_path.split('/')
+#     in_path = src_dir + '/' + sessionID + '.mat'
+#     subsessionID_without_s = subsessionID[1:]
+#     # trg_dir = out_dir_for_copying + '/' + sessionID + '/elc_01plx'
+#     trg_dir = out_dir_for_copying + '/' + sessionID + '/' + subsessionID + '/elc_01plx'
+#     print('src_dir =', src_dir)
+#     print('trg_dir =', trg_dir)
+#     make_directories(trg_dir)
+#     for src_file in listdir(src_dir):
+#         print('src_file =', src_file)
+#         src_path = src_dir + '/' + src_file
+#         elems = src_file.split('.')[0].split('_')
+#         # print(elems)
+#         if len(elems) > 3:
+#             print('File name has too many underscores in', src_file)
+#             print('Its format should be SESSIONID_ELECTRODEID.mat or SESSIONID_SUFFIX_ELECTRODEID.mat.')
+#         if len(elems) == 2 or len(elems) == 3:
+#             orig_electrodeID = elems[-1]
+#             print('orig_electrodeID =', orig_electrodeID)
+#             new_electrodeID = str(int(orig_electrodeID) + 1)
+#             trg_file = sessionID + '_el' + new_electrodeID + '_subsess' + subsessionID_without_s + '_single_channel_sort.mat'
+#             # print(src_file, '->', trg_file)
+#             trg_path = trg_dir + '/' + trg_file
+#             print(src_path, '->', trg_path)
+#             # sh.move(src_path, trg_path)
+#             sh.copyfile(src_path, trg_path)
 
 # divide into chennels (one file for one channel, i.e. electrode) and write out _single_channel.mat files.
 in_dir_for_division = params.plexon_input_dir
@@ -126,7 +126,7 @@ for subsession_path in get_all_paths(in_dir_for_division):
 
         divided = dict(wvf_single_channel=wvf_byc[orig_electrodeID], times_single_channel=times_byc[orig_electrodeID])
         new_electrodeID = str(orig_electrodeID + 1)
-        trg_fileName = sessionID + '_el' + new_electrodeID + '_subsess' + subsessionID_without_s + '_single_channel.mat'
+        trg_fileName = sessionID + '_el' + new_electrodeID + '_subsess' + subsessionID_without_s + '_single_channel_sort.mat'
         trg_path = trg_dir + '/' + trg_fileName
         # print('divided =', divided)
         print(src_path, '->', trg_path)
