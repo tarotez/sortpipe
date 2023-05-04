@@ -29,7 +29,7 @@ for i = 1:size(sess_filenames,2)
                 continue
             end            
             if endsWith(recording_filename, "_single_channel.mat")
-                src_file_path = src_sess_dir + '/' + subsessID + "/" + subsess_filename + "/elc_01plx/" + recording_filename;
+                src_file_path = src_sess_dir + "/" + subsess_filename + "/elc_01plx/" + recording_filename;
                 fprintf("%s\n", src_file_path)            
                 load(src_file_path)
                 wvf = cell(1);
