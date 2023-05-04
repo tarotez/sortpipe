@@ -17,9 +17,9 @@ for subsession_path in get_unprocessed(params.plexon_input_dir, params.matrix_no
     trg_dir = params.matrix_not_cell_array_dir + '/' + sessionID + '/elc_01plx'
     make_directories(trg_dir)
 
-    orig_data = hdf5_loadmat(src_path)
-    wvf_byc = orig_data['wvf']
-    times_byc = orig_data['times']
+    converted = hdf5_loadmat(src_path)
+    wvf_byc = converted['wvf']
+    times_byc = converted['times']
     # print('times.shape =', times.shape)
 
     for orig_electrodeID in range(len(wvf_byc)):

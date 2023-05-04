@@ -46,17 +46,18 @@ for subsession_path in get_unprocessed(in_dir_for_conversion, out_dir_for_conver
 in_dir_for_copying = params.plexon_input_dir
 out_dir_for_copying = params.matrix_not_cell_array_dir
 # for subsession_path in get_unprocessed(in_dir_for_copying, out_dir_for_copying, '_sort.mat'):
-for subsession_path in get_all_paths(in_dir_for_copying):
+for subsession_path in get_all_paths(in_dir_for_copying):    
     print('sessionXX_YYY.mat -> sessionXX_elYY_subsessZ_single_channel_sort.mat, subsession_path =', subsession_path)
     src_dir = in_dir_for_copying + '/' + subsession_path
     sessionID, subsessionID = subsession_path.split('/')
+    in_path = src_dir + '/' + sessionID + '.mat'
     subsessionID_without_s = subsessionID[1:]
     # trg_dir = out_dir_for_copying + '/' + sessionID + '/elc_01plx'
     trg_dir = out_dir_for_copying + '/' + sessionID + '/' + subsessionID + '/elc_01plx'
     print('src_dir =', src_dir)
     print('trg_dir =', trg_dir)
     make_directories(trg_dir)
-    for src_file in listdir(src_dir):        
+    for src_file in listdir(src_dir):
         print('src_file =', src_file)
         src_path = src_dir + '/' + src_file
         elems = src_file.split('.')[0].split('_')
