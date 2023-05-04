@@ -7,18 +7,19 @@ from lib.manage_params import read_config
 params = read_config()
 
 src_root = params.behavior_dir
+trg_root = params.for_stability_analysis_dir
 edf_dirName = 'EDfiles'
 info_dirName = 'Info'
 
-for subsession_path in get_existing(params.behavior_dir, params.for_stability_analysis_dir):
+for subsession_path in get_existing(src_root, trg_root):
 
     # print('subsession_path =', subsession_path)
     sessionID = subsession_path.split('/')[-1]
     # print('sessionID = ', sessionID)
     
-    src_dir = params.behavior_dir + '/' + sessionID + '/'
+    src_dir = src_root + '/' + sessionID + '/'
     # trg_dir = params.for_stability_analysis_dir + '/' + sessionID + '/'
-    trg_dir = params.for_stability_analysis_dir + '/' + subsession_path + '/'
+    trg_dir = trg_root + '/' + subsession_path + '/'
     # make_directories(trg_dir)
 
     edf_src = src_dir + edf_dirName

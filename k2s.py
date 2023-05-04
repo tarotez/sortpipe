@@ -1,12 +1,13 @@
 import shutil as sh
 import numpy as np
-from os import listdir
+# from os import listdir
+from os.path import exists
 from scipy.io import savemat as scipy_savemat
 from hdf5storage import savemat as hdf5_savemat
 from hdf5storage import loadmat as hdf5_loadmat
 from mainfunc.converter import convert
 from lib.manage_params import read_config
-from lib.manage_files import get_unprocessed, get_all_paths, make_directories
+from lib.manage_files import get_unprocessed, get_all_paths, get_existing, make_directories
 
 params = read_config()
 
@@ -133,3 +134,29 @@ for subsession_path in get_all_paths(in_dir_for_division):
         scipy_savemat(trg_path, divided)
         # hdf5_savemat(trg_path, divided, format='7.3', oned_as='column')
 
+# copy behavior files
+src_root = params.behavior_dir
+trg_root = params.for_stability_analysis_dir
+edf_dirName = 'EDfiles'
+info_dirName = 'Info'
+
+for subsession_path in get_existing(src_root, trg_root):
+
+    # print('subsession_path =', subsession_path)
+    sessionID = subsession_path.split('/')[-1]
+    # print('sessionID = ', sessionID)
+    
+    src_dir = src_root + '/' + sessionID + '/'
+    # trg_dir = params.for_stability_analysis_dir + '/' + sessionID + '/'
+    trg_dir = trg_root + '/' + subsession_path + '/'
+    # make_directories(trg_dir)
+
+    edf_src = src_dir + edf_dirName
+    edf_trg = trg_dir + edf_dirName
+    info_src = src_dir + info_dirName
+    info_trg = trg_dir + info_dirName
+
+    if not exists(edf_trg):
+        sh.copytree(edf_src, edf_trg)
+    if not exists(info_trg):
+        sh.copytree(info_src, info_trg)
