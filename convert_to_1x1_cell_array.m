@@ -38,9 +38,9 @@ for i = 1:size(sess_filenames,2)
                 wvf{1,1} = wvf_single_channel;
                 times{1,1} = times_single_channel;
                 target_recording_filename = strrep(recording_filename, "_single_channel", "");
-                target_file_path = target_sess_dir + "/" + subsess_filename + "/" + target_recording_filename;
-                if ~isdir(target_sess_dir + "/" + subsess_filename)
-                    mkdir(target_sess_dir + "/" + subsess_filename)
+                target_file_path = target_sess_dir + "/" + subsess_filename + "/elc_01plx/" + target_recording_filename;
+                if ~isdir(target_sess_dir + "/" + subsess_filename + "/elc_01plx/")
+                    mkdir(target_sess_dir + "/" + subsess_filename + "/elc_01plx/")
                 end
                 if ~isfile(target_file_path)
                     fprintf("  -> %s\n", target_file_path)

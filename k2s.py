@@ -7,7 +7,7 @@ from hdf5storage import savemat as hdf5_savemat
 from hdf5storage import loadmat as hdf5_loadmat
 from mainfunc.converter import convert
 from lib.manage_params import read_config
-from lib.manage_files import get_unprocessed, get_all_paths, get_existing, make_directories
+from lib.manage_files import get_unprocessed, get_all_paths, get_all_sessionIDs, make_directories
 
 params = read_config()
 
@@ -140,7 +140,8 @@ trg_root = params.for_stability_analysis_dir
 edf_dirName = 'EDfiles'
 info_dirName = 'Info'
 
-for subsession_path in get_existing(src_root, trg_root):
+# for subsession_path in get_existing(src_root, trg_root):
+for subsession_path in get_all_sessionIDs(src_root):
 
     # print('subsession_path =', subsession_path)
     sessionID = subsession_path.split('/')[-1]
