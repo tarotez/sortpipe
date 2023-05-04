@@ -140,10 +140,7 @@ trg_root = params.for_stability_analysis_dir
 edf_dirName = 'EDfiles'
 info_dirName = 'Info'
 
-####
 for subsession_path in get_existing(src_root, trg_root):
-####
-
 
     # print('subsession_path =', subsession_path)
     sessionID = subsession_path.split('/')[-1]
@@ -151,7 +148,7 @@ for subsession_path in get_existing(src_root, trg_root):
     
     src_dir = src_root + '/' + sessionID + '/'
     # trg_dir = params.for_stability_analysis_dir + '/' + sessionID + '/'
-    trg_dir = trg_root + '/' + subsession_path + '/'
+    trg_dir = trg_root + '/' + sessionID + '/'
     # make_directories(trg_dir)
 
     edf_src = src_dir + edf_dirName
