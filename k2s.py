@@ -52,6 +52,8 @@ for subsession_path in get_unprocessed(in_dir_for_copying, out_dir_for_copying, 
     subsessionID_without_s = subsessionID[1:]
     # trg_dir = out_dir_for_copying + '/' + sessionID + '/elc_01plx'
     trg_dir = out_dir_for_copying + '/' + sessionID + '/' + subsessionID + '/elc_01plx'
+    print('src_dir =', src_dir)
+    print('trg_dir =', trg_dir)
     make_directories(trg_dir)
     for src_file in listdir(src_dir):        
         print('src_file =', src_file)
