@@ -31,7 +31,7 @@ for i = 1:size(sess_filenames,2)
             %%% if endsWith(recording_filename, "_single_channel.mat")
             if endsWith(recording_filename, "_single_channel_sort.mat")
                 src_file_path = src_sess_dir + "/" + subsess_filename + "/elc_01plx/" + recording_filename;
-                fprintf("%s\n", src_file_path)            
+                % fprintf("%s\n", src_file_path)            
                 load(src_file_path)
                 wvf = cell(1);
                 times = cell(1);
@@ -39,11 +39,14 @@ for i = 1:size(sess_filenames,2)
                 times{1,1} = times_single_channel;
                 target_recording_filename = strrep(recording_filename, "_single_channel", "");
                 target_file_path = target_sess_dir + "/" + subsess_filename + "/" + target_recording_filename;
+                if ~isdir(target_sess_dir + "/" + subsess_filename)
+                    mkdir(target_sess_dir + "/" + subsess_filename)
+                end
                 if ~isfile(target_file_path)
                     fprintf("  -> %s\n", target_file_path)
                     save(target_file_path, 'wvf', 'times');            
-                else
-                    fprintf("  -> target file %s already exists.\n", target_file_path)
+                % else
+                %    fprintf("  -> target file %s already exists.\n", target_file_path)
                 end
             end
             % if endsWith(recording_filename, "_single_channel_sort.mat")
