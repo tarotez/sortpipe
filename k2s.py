@@ -6,7 +6,7 @@ from hdf5storage import savemat as hdf5_savemat
 from hdf5storage import loadmat as hdf5_loadmat
 from mainfunc.converter import convert
 from lib.manage_params import read_config
-from lib.manage_files import get_unprocessed, make_directories
+from lib.manage_files import get_unprocessed, get_all_paths, make_directories
 
 params = read_config()
 
@@ -45,7 +45,8 @@ for subsession_path in get_unprocessed(in_dir_for_conversion, out_dir_for_conver
 # rename and copy sessionXX/subsessionZ/sessionXX_YYY.mat to sessionXX_elYY_subsessZ_single_channel_sort.mat
 in_dir_for_copying = params.plexon_input_dir
 out_dir_for_copying = params.matrix_not_cell_array_dir
-for subsession_path in get_unprocessed(in_dir_for_copying, out_dir_for_copying, '_sort.mat'):
+# for subsession_path in get_unprocessed(in_dir_for_copying, out_dir_for_copying, '_sort.mat'):
+for subsession_path in get_all_paths(in_dir_for_copying):
     print('sessionXX_YYY.mat -> sessionXX_elYY_subsessZ_single_channel_sort.mat, subsession_path =', subsession_path)
     src_dir = in_dir_for_copying + '/' + subsession_path
     sessionID, subsessionID = subsession_path.split('/')
@@ -77,7 +78,8 @@ for subsession_path in get_unprocessed(in_dir_for_copying, out_dir_for_copying, 
 # divide into chennels (one file for one channel, i.e. electrode) and write out _single_channel.mat files.
 in_dir_for_division = params.plexon_input_dir
 out_dir_for_division = params.matrix_not_cell_array_dir
-for subsession_path in get_unprocessed(in_dir_for_division, out_dir_for_division, '.mat'):
+# for subsession_path in get_unprocessed(in_dir_for_division, out_dir_for_division, '.mat'):
+for subsession_path in get_all_paths(in_dir_for_division):
     print('stability -> matrix_not_cell_array, subsession_path =', subsession_path)
     sessionID = subsession_path.split('/')[0]
     in_path = in_dir_for_division + '/' + subsession_path + '/' + sessionID + '.mat'
