@@ -124,7 +124,7 @@ for subsession_path in get_unprocessed(in_dir_for_division, out_dir_for_division
 
         divided = dict(wvf_single_channel=wvf_byc[orig_electrodeID], times_single_channel=times_byc[orig_electrodeID])
         new_electrodeID = str(orig_electrodeID + 1)
-        trg_fileName = sessionID + '_el' + new_electrodeID + '_subsess' + subsessionID_without_s + '_single_channel_sort.mat'
+        trg_fileName = sessionID + '_el' + new_electrodeID + '_subsess' + subsessionID_without_s + '_single_channel.mat'
         trg_path = trg_dir + '/' + trg_fileName
         print('divided =', divided)
         print(src_path, '->', trg_path)
