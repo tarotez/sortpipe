@@ -45,7 +45,7 @@ for subsession_path in get_unprocessed(in_dir_for_conversion, out_dir_for_conver
 # rename and copy sessionXX/subsessionZ/sessionXX_YYY.mat to sessionXX_elYY_subsessZ_single_channel_sort.mat
 in_dir_for_copying = params.plexon_input_dir
 out_dir_for_copying = params.matrix_not_cell_array_dir
-for subsession_path in get_unprocessed(in_dir_for_copying, out_dir_for_copying, '.mat'):
+for subsession_path in get_unprocessed(in_dir_for_copying, out_dir_for_copying, '_sort.mat'):
     print('sessionXX_YYY.mat -> sessionXX_elYY_subsessZ_single_channel_sort.mat, subsession_path =', subsession_path)
     src_dir = in_dir_for_copying + '/' + subsession_path
     sessionID, subsessionID = subsession_path.split('/')
@@ -53,7 +53,6 @@ for subsession_path in get_unprocessed(in_dir_for_copying, out_dir_for_copying, 
     # trg_dir = out_dir_for_copying + '/' + sessionID + '/elc_01plx'
     trg_dir = out_dir_for_copying + '/' + sessionID + '/' + subsessionID + '/elc_01plx'
     make_directories(trg_dir)
-
     for src_file in listdir(src_dir):        
         print('src_file =', src_file)
         src_path = src_dir + '/' + src_file
@@ -73,7 +72,7 @@ for subsession_path in get_unprocessed(in_dir_for_copying, out_dir_for_copying, 
             # sh.move(src_path, trg_path)
             sh.copyfile(src_path, trg_path)
 
-# divide into chennels (one file for one channel, i.e. electrode)
+# divide into chennels (one file for one channel, i.e. electrode) and write out _single_channel.mat files.
 in_dir_for_division = params.plexon_input_dir
 out_dir_for_division = params.matrix_not_cell_array_dir
 for subsession_path in get_unprocessed(in_dir_for_division, out_dir_for_division, '.mat'):
@@ -82,7 +81,7 @@ for subsession_path in get_unprocessed(in_dir_for_division, out_dir_for_division
     in_path = in_dir_for_division + '/' + subsession_path + '/' + sessionID + '.mat'
     converted = hdf5_loadmat(in_path, format='7.3', oned_as='column')
 
-    print('subsession_path =', subsession_path)
+    # print('subsession_path =', subsession_path)
     sessionID, subsessionID = subsession_path.split('/')
     subsessionID_without_s = subsessionID[1:]
     src_path = in_dir_for_division + '/' + subsession_path + '/' + sessionID + '.mat'
@@ -98,14 +97,12 @@ for subsession_path in get_unprocessed(in_dir_for_division, out_dir_for_division
     # print('times_byc =')
     # print(times_byc)
     # print('times_byc.shape =', times_byc.shape)
-    print('len(wvf_byc) =', len(wvf_byc))
-
-    for orig_electrodeID in range(len(wvf_byc)):
-        
-        print('wvf_byc[0].shape =', wvf_byc[0].shape)
-        print('wvf_byc[1].shape =', wvf_byc[1].shape)
-        print('times_byc[0].shape =', times_byc[0].shape)
-        print('times_byc[1].shape =', times_byc[1].shape)
+    # print('len(wvf_byc) =', len(wvf_byc))
+    for orig_electrodeID in range(len(wvf_byc)):        
+        # print('wvf_byc[0].shape =', wvf_byc[0].shape)
+        # print('wvf_byc[1].shape =', wvf_byc[1].shape)
+        # print('times_byc[0].shape =', times_byc[0].shape)
+        # print('times_byc[1].shape =', times_byc[1].shape)
 
         # n_samples = wvf_byc[0].shape[1]
         # wvf_1by1 = [[np.zeros((0, n_samples), dtype=np.double)]]
@@ -126,7 +123,7 @@ for subsession_path in get_unprocessed(in_dir_for_division, out_dir_for_division
         new_electrodeID = str(orig_electrodeID + 1)
         trg_fileName = sessionID + '_el' + new_electrodeID + '_subsess' + subsessionID_without_s + '_single_channel.mat'
         trg_path = trg_dir + '/' + trg_fileName
-        print('divided =', divided)
+        # print('divided =', divided)
         print(src_path, '->', trg_path)
         scipy_savemat(trg_path, divided)
         # hdf5_savemat(trg_path, divided, format='7.3', oned_as='column')
