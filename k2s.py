@@ -140,7 +140,10 @@ trg_root = params.for_stability_analysis_dir
 edf_dirName = 'EDfiles'
 info_dirName = 'Info'
 
+####
 for subsession_path in get_existing(src_root, trg_root):
+####
+
 
     # print('subsession_path =', subsession_path)
     sessionID = subsession_path.split('/')[-1]
