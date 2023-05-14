@@ -30,23 +30,31 @@ for i = 1:size(sess_filenames,2)
             end            
             %%% if endsWith(recording_filename, "_single_channel.mat")
             if endsWith(recording_filename, "_single_channel_sort.mat")
-                src_file_path = src_sess_dir + "/" + subsess_filename + "/elc_01plx/" + recording_filename;
+                if ~isdir(target_sess_dir + "/" + subsess_filename + "/elc_01plx/")
+                    mkdir(target_sess_dir + "/" + subsess_filename + "/elc_01plx/")
+                end                
+                src_file_path = src_sess_dir + "/" + subsess_filename + "/elc_01plx/" + recording_filename;                
                 % fprintf("%s\n", src_file_path)            
                 load(src_file_path)
                 wvf = cell(1);
                 times = cell(1);
                 wvf{1,1} = wvf_single_channel;
                 times{1,1} = times_single_channel;
-                target_recording_filename = strrep(recording_filename, "_single_channel", "");
-                target_file_path = target_sess_dir + "/" + subsess_filename + "/elc_01plx/" + target_recording_filename;
-                if ~isdir(target_sess_dir + "/" + subsess_filename + "/elc_01plx/")
-                    mkdir(target_sess_dir + "/" + subsess_filename + "/elc_01plx/")
-                end
-                if ~isfile(target_file_path)
-                    fprintf("  -> %s\n", target_file_path)
-                    save(target_file_path, 'wvf', 'times');            
+                % write out _sort.mat files
+                target_sorted_recording_filename = strrep(recording_filename, "_single_channel", "");
+                target_sorted_file_path = target_sess_dir + "/" + subsess_filename + "/elc_01plx/" + target_sorted_recording_filename;
+                if ~isfile(target_sorted_file_path)
+                    fprintf("  -> %s\n", target_sorted_file_path)
+                    save(target_sorted_file_path, 'wvf', 'times');
                 % else
                 %    fprintf("  -> target file %s already exists.\n", target_file_path)
+                end
+                % write out .mat files
+                target_unsorted_recording_filename = strrep(target_sorted_recording_filename, "_sort", "");
+                target_unsorted_file_path = target_sess_dir + "/" + subsess_filename + "/elc_01plx/" + target_unsorted_recording_filename;
+                if ~isfile(target_unsorted_file_path)
+                    fprintf("  -> %s\n", target_unsorted_file_path)
+                    save(target_unsorted_file_path, 'wvf');
                 end
             end
             % if endsWith(recording_filename, "_single_channel_sort.mat")
