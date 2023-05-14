@@ -25,7 +25,7 @@ for i = 1:size(sess_names,2)
             recording_filenames = {target_subsess_dir_struct.name};
             for k = 1:size(recording_filenames,2)            
                 recording_filename = recording_filenames{k};
-                if endsWith(recording_filename, "_param.mat")
+                if endsWith(recording_filename, ".mat")
                     target_file_path = target_subsess_dir + "/" + recording_filename;                                                        
                     fprintf("  -> %s\n", target_file_path)
                     save(target_file_path, 'wvf', 'times', 'Findex', 'TimesBegin');                
