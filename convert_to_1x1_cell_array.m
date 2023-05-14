@@ -54,7 +54,7 @@ for i = 1:size(sess_filenames,2)
                 target_unsorted_file_path = target_sess_dir + "/" + subsess_filename + "/elc_01plx/" + target_unsorted_recording_filename;
                 if ~isfile(target_unsorted_file_path)
                     fprintf("  -> %s\n", target_unsorted_file_path)
-                    save(target_unsorted_file_path, 'wvf');
+                    save(target_unsorted_file_path, 'wvf', 'times');
                 end
             end
             % if endsWith(recording_filename, "_single_channel_sort.mat")
